@@ -21,7 +21,8 @@
             android:name=".ContactsActivity"
             android:label="@string/title_activity_contacts"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MemoryLeaksActivity"></activity>
+        <activity android:name=".MemoryLeaksActivity" />
+        <activity android:name=".DumbActivity"></activity>
     </application>
 
 </manifest>
