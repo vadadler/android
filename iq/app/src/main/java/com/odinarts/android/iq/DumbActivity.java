@@ -2,7 +2,10 @@ package com.odinarts.android.iq;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class DumbActivity extends AppCompatActivity {
 
@@ -14,6 +17,6 @@ public class DumbActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String how = bundle.getString("how");
 
-        Toast.makeText(this, "Leak made by " + how, Toast.LENGTH_LONG).show();
+        ((TextView)findViewById(R.id.textViewDumbStatus)).setText(how);
     }
 }

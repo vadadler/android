@@ -16,4 +16,14 @@
         android:text="Dumb activity to stop MemoryLeaksActivity"
         android:id="@+id/textView2"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewDumbStatus"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="148dp" />
+
 </RelativeLayout>

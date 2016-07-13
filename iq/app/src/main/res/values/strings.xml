@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">iq</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="action_settings">Contacts</string>
+    <string name="memory_leak_static_activity">Memory leak was caused by process global static
+        object sMemoryLeaksActivity which holds strong reference to just destroyed MemoryLeaksActivity.
+        That destroyed activity will not be garbage collected due to the strong reference.
+    </string>
+    <string name="memory_leak_static_view">Memory leak was caused by process global static
+        object View sView which holds strong reference to just destroyed MemoryLeaksActivity.
+        That destroyed activity will not be garbage collected due to the strong reference.
+    </string>
+    <string name="memory_leak_inner_class">Memory leak was caused by having a static reference to
+        an instance of an inner class of MemoryLeaksActivity class. Inner class has access to outer
+        class variables and thus holds reference to the outer class instance.
+    </string>
+
+    \</resources>
