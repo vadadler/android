@@ -51,4 +51,12 @@
         android:layout_below="@+id/buttonBgThread"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Memroy Leaks"
+        android:id="@+id/buttonMemoryLeaks"
+        android:layout_below="@+id/buttonContacts"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

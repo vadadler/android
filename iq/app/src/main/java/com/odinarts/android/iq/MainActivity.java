@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Using AsyncTask to show progress.
-        // This apporach is exposed to issue of 
+        // This approach is exposed to the issue of leaking activities.
+        // Where AsyncTask keeps invalid reference (due to activity restart i.e. screen rotation)
+        // to parent activity.
         mPBar = (ProgressBar)findViewById(R.id.progressBar);
         mPBar.setVisibility(View.INVISIBLE);
 
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Show progress using a worker thread and Handler.
+        // Also potential memory leak since Thread is declared and instantiated inside
+        // inner anonymous class.
         findViewById(R.id.buttonBgThread).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Launch Memory Leaks activity to demonstrate how memory can be leaked in Android.
+        findViewById(R.id.buttonMemoryLeaks).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MemoryLeaksActivity.class);
                 startActivity(intent);
             }
         });
