@@ -12,7 +12,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Static Activities"
+        android:text="Static Activitie"
         android:id="@+id/buttonStaticActivities"
         android:layout_below="@+id/textView"
         android:layout_alignParentRight="true"
@@ -21,7 +21,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Static Views"
+        android:text="Static View"
         android:id="@+id/buttonStaticViews"
         android:layout_below="@+id/buttonStaticActivities"
         android:layout_alignParentRight="true" />
@@ -29,7 +29,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inner Classes"
+        android:text="Inner Class"
         android:id="@+id/buttonInnerClasses"
         android:layout_below="@+id/buttonStaticViews"
         android:layout_alignParentRight="true" />
@@ -37,7 +37,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Anonymous Classes"
+        android:text="Anonymous Class"
         android:id="@+id/buttonAnonymousClasses"
         android:layout_below="@+id/buttonInnerClasses"
         android:layout_alignParentRight="true" />
@@ -45,7 +45,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Handlers"
+        android:text="Handler with anonymous runnable"
         android:id="@+id/buttonHandlers"
         android:layout_below="@+id/buttonAnonymousClasses"
         android:layout_alignParentRight="true" />
@@ -53,18 +53,20 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Threads"
+        android:text="Thread"
         android:id="@+id/buttonThreads"
         android:layout_below="@+id/buttonHandlers"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Timer Tasks"
+        android:text="Timer Task"
         android:id="@+id/buttonTimerTasks"
         android:layout_below="@+id/buttonThreads"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone" />
 
     <Button
         android:layout_width="match_parent"
@@ -72,7 +74,8 @@
         android:text="Sensor Manager"
         android:id="@+id/buttonSensorManager"
         android:layout_below="@+id/buttonTimerTasks"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone" />
 
     <TextView
         android:layout_width="wrap_content"

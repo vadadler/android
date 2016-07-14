@@ -1,14 +1,13 @@
 package com.odinarts.android.iq;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MemoryLeaksActivity extends AppCompatActivity {
     private static MemoryLeaksActivity sMemoryLeaksActivity;
@@ -42,12 +41,33 @@ public class MemoryLeaksActivity extends AppCompatActivity {
             }
         });
 
+        // Inner class.
         Button icButton = (Button)findViewById(R.id.buttonInnerClasses);
         icButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createInstanceOfInnerClass();
                 startDummyActivity(getResources().getString(R.string.memory_leak_inner_class));
+            }
+        });
+
+        // Anonymous class.
+        Button acButton = (Button)findViewById(R.id.buttonAnonymousClasses);
+        acButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAnonymousClass();
+                startDummyActivity(getResources().getString(R.string.memory_leak_anonymous_class));
+            }
+        });
+
+        // Handler with anonymous Runnable.
+        Button hButton = (Button)findViewById(R.id.buttonHandlers);
+        hButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createHandler();
+                startDummyActivity(getResources().getString(R.string.memory_leak_anonymous_runnable));
             }
         });
 
@@ -69,6 +89,30 @@ public class MemoryLeaksActivity extends AppCompatActivity {
     private void createInstanceOfInnerClass() {
         sInnerClass = new InnerClass();
     }
+
+    // Handler is created on main thread. Until message is processed in 5 minutes in this example
+    // the anonymously created runnable will keep reference to the Activity which could be destroyed.
+    private void createHandler() {
+        new Handler() {
+            @Override public void handleMessage(Message message) {
+                super.handleMessage(message);
+            }
+        }.postDelayed(new Runnable() {
+            @Override public void run() {
+                while(true);
+            }
+        }, 5*60*1000);
+    }
+
+    private void createAnonymousClass() {
+        new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object... params) {
+                while(true) ;
+            }
+        };
+    }
+
     /**
      * Force MemoryLeaksActivity to stop. Since DummyActivity covers it.
      */
