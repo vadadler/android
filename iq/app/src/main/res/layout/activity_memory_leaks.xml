@@ -12,7 +12,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Static Activitie"
+        android:text="Static Activity"
         android:id="@+id/buttonStaticActivities"
         android:layout_below="@+id/textView"
         android:layout_alignParentRight="true"

@@ -24,6 +24,16 @@
         android:id="@+id/textViewDumbStatus"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="148dp" />
+        android:visibility="visible"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false"/>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/webViewDetails"
+        android:layout_below="@+id/textViewDumbStatus"
+        />
 
 </RelativeLayout>

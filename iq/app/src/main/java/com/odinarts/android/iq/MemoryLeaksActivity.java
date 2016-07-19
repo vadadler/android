@@ -27,7 +27,8 @@ public class MemoryLeaksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setStaticActivity();
-                startDummyActivity(getResources().getString(R.string.memory_leak_static_activity));
+                startDummyActivity(getResources().getString(R.string.memory_leak_static_activity),
+                        getResources().getString(R.string.memory_leak_src_url));
             }
         });
 
@@ -37,7 +38,8 @@ public class MemoryLeaksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setStaticView();
-                startDummyActivity(getResources().getString(R.string.memory_leak_static_view));
+                startDummyActivity(getResources().getString(R.string.memory_leak_static_view),
+                        getResources().getString(R.string.memory_leak_src_url));
             }
         });
 
@@ -47,7 +49,8 @@ public class MemoryLeaksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createInstanceOfInnerClass();
-                startDummyActivity(getResources().getString(R.string.memory_leak_inner_class));
+                startDummyActivity(getResources().getString(R.string.memory_leak_inner_class),
+                        getResources().getString(R.string.memory_leak_src_url));
             }
         });
 
@@ -57,7 +60,8 @@ public class MemoryLeaksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createAnonymousClass();
-                startDummyActivity(getResources().getString(R.string.memory_leak_anonymous_class));
+                startDummyActivity(getResources().getString(R.string.memory_leak_anonymous_class),
+                        getResources().getString(R.string.memory_leak_src_url));
             }
         });
 
@@ -67,7 +71,8 @@ public class MemoryLeaksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createHandler();
-                startDummyActivity(getResources().getString(R.string.memory_leak_anonymous_runnable));
+                startDummyActivity(getResources().getString(R.string.memory_leak_anonymous_runnable),
+                        getResources().getString(R.string.memory_leak_src_url));
             }
         });
 
@@ -91,7 +96,7 @@ public class MemoryLeaksActivity extends AppCompatActivity {
     }
 
     // Handler is created on main thread. Until message is processed in 5 minutes in this example
-    // the anonymously created runnable will keep reference to the Activity which could be destroyed.
+    // the anonymously created runnable will keep reference to the Activitygx   .
     private void createHandler() {
         new Handler() {
             @Override public void handleMessage(Message message) {
@@ -116,9 +121,10 @@ public class MemoryLeaksActivity extends AppCompatActivity {
     /**
      * Force MemoryLeaksActivity to stop. Since DummyActivity covers it.
      */
-    private void startDummyActivity(String how) {
+    private void startDummyActivity(String how, String srcUrlMemoryLeaks) {
         Intent intent = new Intent(this, DumbActivity.class);
         intent.putExtra("how", how);
+        intent.putExtra("srcUrl", srcUrlMemoryLeaks);
         startActivity(intent);
         try {
             Thread.sleep(1000);

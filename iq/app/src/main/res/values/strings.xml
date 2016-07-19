@@ -14,5 +14,16 @@
         an instance of an inner class of MemoryLeaksActivity class. Inner class has access to outer
         class variables and thus holds reference to the outer class instance.
     </string>
-
-    \</resources>
+    <string name="memory_leak_anonymous_class">Memory leak was caused by having declared and instantiated
+        anonymously AsyncTask inside MemoryLeaksActivity. That instance of AsyncTask will keep reference
+        to MemoryLeaksActivity object after it is destroyed. Thus keeping it from being freed by GC.
+    </string>
+    <string name="memory_leak_anonymous_runnable">Memory leak was caused by having Handler created on
+        the main thread with anonymous runnable which is queued up to be executed by the Handler
+        in the future. Until runnable is executed it keeps strong reference to the Activity preventing
+        it to be GCed.
+    </string>
+    <string name="memory_leak_src_url">
+        "https://raw.githubusercontent.com/vadadler/android/master/iq/app/src/main/java/com/odinarts/android/iq/MemoryLeaksActivity.java"
+    </string>
+    </resources>
