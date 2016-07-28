@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">todo</string>
+    <string name="app_name">TODO</string>
+    <string name="main_menu_title">Add TODO</string>
+    <string name="app_label">Todo</string>
+    <string name="add_dialog_title">Add new TODO</string>
+    <string name="add_dialog_message">What is that you want to do?</string>
+    <string name="add_dialog_positive_button">Add</string>
+    <string name="add_dialog_negative_button">Cancel</string>
 </resources>
