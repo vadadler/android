@@ -1,19 +1,38 @@
 package com.odinarts.android.todo;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import com.odinarts.android.todo.db.TodoContract;
+import com.odinarts.android.todo.db.TodoContract.TodoEntry;
+import com.odinarts.android.todo.db.TodoDbHelper;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private TodoDbHelper mDbHelper;
+    private ListView mTodoListView;
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDbHelper = new TodoDbHelper(this);
+        mTodoListView = (ListView) findViewById(R.id.list_todo);
+
+        updateUI();
     }
 
     @Override
@@ -35,18 +54,17 @@ public class MainActivity extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-/*
-                            String task = String.valueOf(taskEditText.getText());
-                            SQLiteDatabase db = mHelper.getWritableDatabase();
+                            String todo = String.valueOf(editTextTodo.getText());
+                            SQLiteDatabase db = mDbHelper.getWritableDatabase();
                             ContentValues values = new ContentValues();
-                            values.put(TaskContract.TaskEntry.COL_TASK_TITLE, task);
-                            db.insertWithOnConflict(TaskContract.TaskEntry.TABLE,
+                            values.put(TodoEntry.COLUMN_NAME_TEXT, todo);
+                            db.insertWithOnConflict(TodoEntry.TABLE_NAME,
                                     null,
                                     values,
                                     SQLiteDatabase.CONFLICT_REPLACE);
                             db.close();
+
                             updateUI();
-*/
                         }
                     })
                     .setNegativeButton(R.string.add_dialog_negative_button, null)
@@ -56,5 +74,36 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Refresh UI with data from database.
+     */
+    private void updateUI() {
+        ArrayList<String> todoList = new ArrayList<>();
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(TodoContract.TodoEntry.TABLE_NAME,
+            new String[]{TodoContract.TodoEntry._ID, TodoEntry.COLUMN_NAME_TEXT},
+            null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            int index = cursor.getColumnIndex(TodoEntry.COLUMN_NAME_TEXT);
+            todoList.add(cursor.getString(index));
+        }
+
+        if (mAdapter == null) {
+            mAdapter = new ArrayAdapter<>(this,
+                    R.layout.todo_item,
+                    R.id.task_text,
+                    todoList);
+            mTodoListView.setAdapter(mAdapter);
+        } else {
+            mAdapter.clear();
+            mAdapter.addAll(todoList);
+            mAdapter.notifyDataSetChanged();
+        }
+
+        cursor.close();
+        db.close();
     }
 }
