@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
+              android:layout_height="match_parent"
+              android:background="#FFFCFCFC">
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,4 +17,14 @@
         android:layout_alignParentStart="true"
         android:text="This is a task" />
 
+    <View android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete_todo_button"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="#FFFCFCFC"/>
 </LinearLayout>

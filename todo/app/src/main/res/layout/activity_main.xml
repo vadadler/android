@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.odinarts.android.todo.MainActivity">
+    tools:context="com.odinarts.android.todo.MainActivity"
+    android:background="#fcfcfc">
 
     <ListView
         android:id="@+id/list_todo"
