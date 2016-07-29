@@ -9,7 +9,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -59,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
                             ContentValues values = new ContentValues();
                             values.put(TodoEntry.COLUMN_NAME_TEXT, todo);
                             db.insertWithOnConflict(TodoEntry.TABLE_NAME,
-                                    null,
-                                    values,
-                                    SQLiteDatabase.CONFLICT_REPLACE);
+                                null,
+                                values,
+                                SQLiteDatabase.CONFLICT_REPLACE);
                             db.close();
 
                             updateUI();
@@ -97,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
                     R.id.task_text,
                     todoList);
             mTodoListView.setAdapter(mAdapter);
-        } else {
+        }
+        else {
             mAdapter.clear();
             mAdapter.addAll(todoList);
             mAdapter.notifyDataSetChanged();
@@ -105,5 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
         cursor.close();
         db.close();
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean isChecked = ((CheckBox) view).isChecked();
+
+        findViewById(R.id.delete_todo_button).setVisibility(isChecked ? View.VISIBLE : View.GONE);
     }
 }
