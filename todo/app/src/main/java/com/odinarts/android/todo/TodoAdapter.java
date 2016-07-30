@@ -38,6 +38,7 @@ class TodoAdapter extends ArrayAdapter<ToDo> {
             convertView = inflater.inflate(R.layout.todo_item, null);
             viewHolder = new ViewHolder();
             viewHolder.check = (CheckBox) convertView.findViewById(R.id.task_done);
+            viewHolder.check.setTag(position);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.task_text);
             viewHolder.button = (ImageButton) convertView.findViewById(R.id.delete_todo_button);
 
