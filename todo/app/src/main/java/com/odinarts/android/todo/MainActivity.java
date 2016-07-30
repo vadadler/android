@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private TodoDbHelper mDbHelper;
     private ListView mTodoListView;
     private ArrayAdapter<String> mAdapter;
+    private TodoAdapter mAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateUI() {
         ArrayList<String> todoList = new ArrayList<>();
+        ArrayList<ToDo> todoList2 = new ArrayList<>();
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         Cursor cursor = db.query(TodoContract.TodoEntry.TABLE_NAME,
             new String[]{TodoContract.TodoEntry._ID, TodoEntry.COLUMN_NAME_TEXT},
@@ -91,14 +93,17 @@ public class MainActivity extends AppCompatActivity {
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(TodoEntry.COLUMN_NAME_TEXT);
             todoList.add(cursor.getString(index));
+            todoList2.add(new ToDo(cursor.getString(index), false));
         }
 
-        if (mAdapter == null) {
+        if (mAdapter2 == null) {
             mAdapter = new ArrayAdapter<>(this,
                     R.layout.todo_item,
                     R.id.task_text,
                     todoList);
-            mTodoListView.setAdapter(mAdapter);
+            //mTodoListView.setAdapter(mAdapter);
+            mAdapter2 = new TodoAdapter(this, todoList2);
+            mTodoListView.setAdapter(mAdapter2);
         }
         else {
             mAdapter.clear();
