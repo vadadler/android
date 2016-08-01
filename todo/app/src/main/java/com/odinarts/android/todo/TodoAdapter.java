@@ -1,6 +1,7 @@
 package com.odinarts.android.todo;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,18 +14,22 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 class TodoAdapter extends ArrayAdapter<ToDo> {
+    public static final String TAG = "TODO.TodoApapter";
+
     private class ViewHolder {
         CheckBox check;
         TextView textView;
         ImageButton button;
     }
 
-    LayoutInflater inflater;
-    ViewHolder viewHolder;
+    LayoutInflater mInflater;
+    ViewHolder mViewHolder;
+    Context mActivityContext;
 
     public TodoAdapter(Context context, ArrayList<ToDo> todos) {
         super(context, 0, todos);
-        inflater = LayoutInflater.from(context);
+        mActivityContext = context;
+        mInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -35,7 +40,7 @@ class TodoAdapter extends ArrayAdapter<ToDo> {
 
         // Check if existing view is being reused. If not inflate the view.
         if(convertView == null) {
-            convertView = inflater.inflate(R.layout.todo_item, null);
+            convertView = mInflater.inflate(R.layout.todo_item, null);
             viewHolder = new ViewHolder();
             viewHolder.check = (CheckBox) convertView.findViewById(R.id.task_done);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.task_text);
@@ -51,6 +56,7 @@ class TodoAdapter extends ArrayAdapter<ToDo> {
                     ViewHolder vh = (ViewHolder)v.getTag();
                     int position = (Integer)vh.textView.getTag();
                     ToDo todo = getItem(position);
+                    Log.i(TAG, "position=" + position + " isDone=" + todo.isDone);
                     todo.isDone = todo.isDone ? false : true;
                     vh.button.setVisibility(todo.isDone ? View.VISIBLE : View.GONE);
                 }
@@ -66,6 +72,7 @@ class TodoAdapter extends ArrayAdapter<ToDo> {
                     todo.isDone = false;
                     vh.button.setVisibility(todo.isDone ? View.VISIBLE : View.GONE);
                     vh.check.setChecked(todo.isDone);
+                    ((MainActivity)mActivityContext).deleteTodo(todo.text);
                 }
             });
 

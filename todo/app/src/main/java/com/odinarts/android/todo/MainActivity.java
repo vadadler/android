@@ -7,9 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -20,10 +20,11 @@ import com.odinarts.android.todo.db.TodoDbHelper;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG = "TODO.MainActivity";
+
     private TodoDbHelper mDbHelper;
     private ListView mTodoListView;
-    private ArrayAdapter<String> mAdapter;
-    private TodoAdapter mAdapter2;
+    private TodoAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +79,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Delete Todo. NOTE: duplicates are not supported.
+     * @param text text of the Todo to be deleted.
+     */
+    public void deleteTodo(String text) {
+        Log.i(TAG, "text=" + text);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        db.delete(TodoEntry.TABLE_NAME, "text like ?", new String[] {text});
+        db.close();
+        updateUI();
+    }
+
+    /**
      * Refresh UI with data from database.
      */
     private void updateUI() {
-        ArrayList<String> todoList = new ArrayList<>();
-        ArrayList<ToDo> todoList2 = new ArrayList<>();
+        ArrayList<ToDo> todoList = new ArrayList<>();
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         Cursor cursor = db.query(TodoContract.TodoEntry.TABLE_NAME,
             new String[]{TodoContract.TodoEntry._ID, TodoEntry.COLUMN_NAME_TEXT},
@@ -90,23 +102,17 @@ public class MainActivity extends AppCompatActivity {
 
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndex(TodoEntry.COLUMN_NAME_TEXT);
-            todoList.add(cursor.getString(index));
-            todoList2.add(new ToDo(cursor.getString(index), false));
+            todoList.add(new ToDo(cursor.getString(index), false));
         }
 
-        if (mAdapter2 == null) {
-            mAdapter = new ArrayAdapter<>(this,
-                    R.layout.todo_item,
-                    R.id.task_text,
-                    todoList);
-            //mTodoListView.setAdapter(mAdapter);
-            mAdapter2 = new TodoAdapter(this, todoList2);
-            mTodoListView.setAdapter(mAdapter2);
+        if (mAdapter == null) {
+            mAdapter = new TodoAdapter(this, todoList);
+            mTodoListView.setAdapter(mAdapter);
         }
         else {
-            mAdapter2.clear();
-            mAdapter2.addAll(todoList2);
-            mAdapter2.notifyDataSetChanged();
+            mAdapter.clear();
+            mAdapter.addAll(todoList);
+            mAdapter.notifyDataSetChanged();
         }
 
         cursor.close();
