@@ -9,9 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -106,19 +104,12 @@ public class MainActivity extends AppCompatActivity {
             mTodoListView.setAdapter(mAdapter2);
         }
         else {
-            mAdapter.clear();
-            mAdapter.addAll(todoList);
-            mAdapter.notifyDataSetChanged();
+            mAdapter2.clear();
+            mAdapter2.addAll(todoList2);
+            mAdapter2.notifyDataSetChanged();
         }
 
         cursor.close();
         db.close();
-    }
-
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean isChecked = ((CheckBox) view).isChecked();
-
-        findViewById(R.id.delete_todo_button).setVisibility(isChecked ? View.VISIBLE : View.GONE);
     }
 }

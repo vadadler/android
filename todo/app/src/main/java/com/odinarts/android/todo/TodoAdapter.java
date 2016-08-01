@@ -39,18 +39,33 @@ class TodoAdapter extends ArrayAdapter<ToDo> {
             viewHolder = new ViewHolder();
             viewHolder.check = (CheckBox) convertView.findViewById(R.id.task_done);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.task_text);
+            viewHolder.textView.setTag(position);
             viewHolder.button = (ImageButton) convertView.findViewById(R.id.delete_todo_button);
-            viewHolder.button.setTag(position);
+            viewHolder.button.setTag(viewHolder);
             viewHolder.check.setTag(viewHolder);
 
+            // Click on checkbox.
             viewHolder.check.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ViewHolder vh = (ViewHolder)v.getTag();
-                    int position = (Integer)vh.button.getTag();
+                    int position = (Integer)vh.textView.getTag();
                     ToDo todo = getItem(position);
                     todo.isDone = todo.isDone ? false : true;
                     vh.button.setVisibility(todo.isDone ? View.VISIBLE : View.GONE);
+                }
+            });
+
+            // Click on delete button.
+            viewHolder.button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ViewHolder vh = (ViewHolder)v.getTag();
+                    int position = (Integer)vh.textView.getTag();
+                    ToDo todo = getItem(position);
+                    todo.isDone = false;
+                    vh.button.setVisibility(todo.isDone ? View.VISIBLE : View.GONE);
+                    vh.check.setChecked(todo.isDone);
                 }
             });
 
