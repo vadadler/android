@@ -1,6 +1,7 @@
 package com.odinarts.android.todo;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,8 @@ class TodoAdapter extends ArrayAdapter<ToDo> {
                     Log.i(TAG, "position=" + position + " isDone=" + todo.isDone);
                     todo.isDone = todo.isDone ? false : true;
                     vh.button.setVisibility(todo.isDone ? View.VISIBLE : View.GONE);
+                    vh.textView.setPaintFlags(todo.isDone ? (vh.textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG) :
+                            (vh.textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG)));
                 }
             });
 
