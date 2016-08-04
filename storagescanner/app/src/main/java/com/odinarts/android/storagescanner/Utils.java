@@ -8,11 +8,20 @@ import java.util.ArrayList;
 public class Utils {
 
     public static int getTotalNumberOfFiles() {
-        ArrayList<File> fileList = new ArrayList<File>();
+        final ArrayList<File> fileList = new ArrayList<File>();
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) == true) {
             File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
             if (root != null) {
                 getFile(fileList, root);
+
+                // Populate db.
+                Thread th = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayList<File> list = fileList;
+                    }
+                });
+
                 return fileList.size();
             }
             else {
