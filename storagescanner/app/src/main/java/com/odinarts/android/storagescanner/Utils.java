@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Utils {
+    public static final int TASK_COMPLETED = -1;
+    public static final int TASK_CANCELLED = -2;
 
     public static int getTotalNumberOfFiles() {
         final ArrayList<File> fileList = new ArrayList<File>();

@@ -80,7 +80,7 @@ public class DoWork extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
         if(mContainer!=null && mContainer.getActivity()!=null) {
-            mContainer.populateResult((String)o);
+            mContainer.updateProgress(Utils.TASK_COMPLETED);
             mContainer.hideProgressBar();
             mContainer = null;
         }
@@ -108,4 +108,14 @@ public class DoWork extends AsyncTask {
             super.onProgressUpdate(values);
         }
     }
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        if(mContainer!=null && mContainer.getActivity()!=null) {
+            mContainer.updateProgress(Utils.TASK_CANCELLED);
+            mContainer.hideProgressBar();
+            mContainer = null;
+        }
+    }
+
 }

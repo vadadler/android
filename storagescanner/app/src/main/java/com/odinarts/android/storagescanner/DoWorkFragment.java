@@ -1,7 +1,9 @@
 package com.odinarts.android.storagescanner;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -108,12 +110,22 @@ public class DoWorkFragment extends Fragment {
                         String label = (String) ((Button) v).getText();
                         String strStart = getResources().getString(R.string.button_start_scan_label);
                         if (label.compareToIgnoreCase(strStart) == 0) {
-                            // Setup notification.
+                            // Setup notification. Return to activity when notification is clicked.
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            PendingIntent pendingIntent =
+                                PendingIntent.getActivity(
+                                        getContext(),
+                                        0,
+                                        intent,
+                                        PendingIntent.FLAG_UPDATE_CURRENT
+                                );
+
                             mNotificationManager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
                             mBuilder = new NotificationCompat.Builder(getActivity());
                             mBuilder.setContentTitle(getString(R.string.scan_notification_title))
                                     .setContentText(getString(R.string.scan_notification_text))
-                                    .setSmallIcon(R.drawable.cast_ic_notification_connecting);
+                                    .setSmallIcon(R.drawable.cast_ic_notification_connecting)
+                                    .setContentIntent(pendingIntent);
 
                             mAsyncTask = new DoWork(DoWorkFragment.this);
                             mAsyncTask.execute(files);
@@ -166,7 +178,6 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void hideProgressBar() {
-        //ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.progress_bar);
         if(mProgressBar != null) {
             mProgressBar.setVisibility(View.GONE);
             Button button = (Button) mMainView.findViewById(R.id.button_start_scan);
@@ -174,19 +185,31 @@ public class DoWorkFragment extends Fragment {
         }
     }
 
-    public void populateResult(String s) {
-        //TextView resultView = (TextView)getActivity().findViewById(R.id.textUrlContent);
-        //resultView.setText(s);
-    }
-
     /**
      * Update progress. Called by async task. Update progress bar and notification.
+     *
+     * * @param value progress value. Utils.TASK_COMPLETED indicates end of processing.
+     *          Utils.TASK_CANCELLED indicates scan had been cancelled.
      */
     public void updateProgress(int value) {
         if(mProgressBar != null) {
             Log.i(TAG, "progress:" + value);
-            mProgressBar.setProgress(value);
-            mBuilder.setProgress(mNumberOfFiles, value, false);
+            if(value == Utils.TASK_COMPLETED) {
+                // Scan is complete. Change notification text and remove progress bar.
+                mBuilder.setContentText(getString(R.string.scan_notification_done_text))
+                        .setSmallIcon(R.drawable.cast_ic_notification_on)
+                        .setProgress(0, 0, false);
+            }
+            else if(value == Utils.TASK_CANCELLED) {
+                mBuilder.setContentText(getString(R.string.scan_notification_cancelled_text))
+                        .setSmallIcon(R.drawable.cast_ic_notification_disconnect)
+                        .setProgress(0, 0, false);
+            }
+            else {
+                mProgressBar.setProgress(value);
+                mBuilder.setProgress(mNumberOfFiles, value, false);
+            }
+
             mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         }
     }
