@@ -178,7 +178,7 @@ public class DoWorkFragment extends Fragment {
 
     public void updateProgress(int value) {
         if(mProgressBar != null) {
-            //Log.i(TAG, "progress:" + value);
+            Log.i(TAG, "progress:" + value);
             mProgressBar.setProgress(value);
         }
     }
@@ -200,5 +200,14 @@ public class DoWorkFragment extends Fragment {
         else {
             return true;
         }
+    }
+
+    /**
+     * Stop scanning when Back button is pressed.
+     */
+    public void backButtonWasPressed() {
+        Log.i(TAG, "Back button was pressed. Stop scanning.");
+        mAsyncTask.cancel(true);
+        hideProgressBar();
     }
 }
