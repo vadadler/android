@@ -23,3 +23,10 @@ Functional Acceptance Criteria:
 * Fragment and AsyncTask are used to achieve background processing and application state preservation during configuration changes (screen rotation)
 * SQLite is used to store statistial data. It is used as source for analysis. Two tables are used: files (columns: name, path, length) and extenstions (columns: extension and count)
 * To support Back button click functionality main activity is derived from FragmentActivity which keeps reference to the fragment.
+* Notifications support. 
+  * Display scan progress in sync with progress bar on the main screen.
+  * Based on stage of the scan display different text and icons in notification drawer. 
+  * Return to running activity when notification is clicked.
+* Run time permissions.
+  * Basic support for prompting to allow access to external storage. 
+  * Decline perminssion is not supported in this release.
