@@ -16,3 +16,10 @@ Functional Acceptance Criteria:
 * UI must handle screen orientation changes.
 * When app is sent to background (by pressing HOME button), the scan should continue.
 * When app is stopped by the user (by pressing BACK button), the scan must be stopped immediately.
+ 
+
+**Architectual and implementation notes**
+
+* Fragment and AsyncTask are used to achieve background processing and application state preservation during configuration changes (screen rotation)
+* SQLite is used to store statistial data. It is used as source for analysis. Two tables are used: files (columns: name, path, length) and extenstions (columns: extension and count)
+* To support Back button click functionality main activity is derived from FragmentActivity which keeps reference to the fragment.
