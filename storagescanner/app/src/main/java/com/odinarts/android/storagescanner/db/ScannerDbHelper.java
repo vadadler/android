@@ -1,11 +1,15 @@
 package com.odinarts.android.storagescanner.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.odinarts.android.storagescanner.db.FilesContract.FilesEntry;
 import com.odinarts.android.storagescanner.db.ExtensionsContract.ExtensionsEntry;
+import com.odinarts.android.storagescanner.db.FilesContract.FilesEntry;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class ScannerDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -39,5 +43,35 @@ public class ScannerDbHelper extends SQLiteOpenHelper {
 
         // create new tables
         onCreate(db);
+    }
+
+    /**
+     * Delete all data from tables.
+     */
+    public void deleteData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(FilesEntry.TABLE_NAME, null, null);
+        db.delete(ExtensionsEntry.TABLE_NAME, null, null);
+    }
+
+    /**
+     * Insert rows in the loop.
+     * TODO: figure out how to optimize this.
+     */
+    public void insertFileEntries(ArrayList<File> files) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        for (File file : files) {
+            String name = file.getName();
+            String path = file.getPath();
+            long length = file.length();
+
+            values.put(FilesEntry.COLUMN_NAME, name);
+            values.put(FilesEntry.COLUMN_PATH, path);
+            values.put(FilesEntry.COLUMN_LENGTH, length);
+
+            db.insert(FilesEntry.TABLE_NAME, null, values);
+        }
     }
 }

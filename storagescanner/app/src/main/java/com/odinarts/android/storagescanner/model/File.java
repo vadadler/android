@@ -4,11 +4,11 @@ public class File {
     private int mId;
     private String mName;
     private String mPath;
-    private int mLength;
+    private long mLength;
 
     /** Constructors. */
     public File() {}
-    public  File(int id, String name, String path, int length) {
+    public  File(int id, String name, String path, long length) {
         mId = id;
         mName = name;
         mPath = path;
@@ -28,7 +28,7 @@ public class File {
         mPath = path;
     }
 
-    public void setLength(int length) {
+    public void setLength(long length) {
         mLength = length;
     }
 
@@ -45,7 +45,7 @@ public class File {
         return mPath;
     }
 
-    public int getLength() {
+    public long getLength() {
         return mLength;
     }
 }

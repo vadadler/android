@@ -3,6 +3,7 @@ package com.odinarts.android.storagescanner;
 import android.app.NotificationManager;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -14,14 +15,21 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.odinarts.android.storagescanner.db.ScannerDbHelper;
+
+import java.util.ArrayList;
+
 public class DoWorkFragment extends Fragment {
     public static final String TAG = "OA.DoWorkFragment";
     public static final int REQUEST_READWRITE_STORAGE = 1;
 
     /** Background worker. */
     private DoWork mAsyncTask;
+
+
     private View mMainView;
     private ProgressBar mProgressBar;
+    private ScannerDbHelper mDbHelper;
     private NotificationManager mNotifyManager;
 
     /** Number of files on exteranl storage. */
@@ -34,7 +42,7 @@ public class DoWorkFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "OnCreate");
+        Log.i(TAG, "OnCreate: " + Environment.getExternalStorageDirectory().getAbsolutePath());
 
         // Hide or show progress bar.
         if(isTaskRunning(mAsyncTask)) {
@@ -86,18 +94,21 @@ public class DoWorkFragment extends Fragment {
                     }
                 }
                 else {
-                    mNumberOfFiles = Utils.getTotalNumberOfFiles();
-                    Log.i(TAG, "Total number of files=" + mNumberOfFiles);
+                    ArrayList<java.io.File> files = Utils.getAllFiles();
+                    if (files != null) {
+                        mNumberOfFiles = files.size();
+                        Log.i(TAG, "Total number of files=" + mNumberOfFiles);
 
-                    String label = (String) ((Button) v).getText();
-                    String strStart = getResources().getString(R.string.button_start_scan_label);
-                    if (label.compareToIgnoreCase(strStart) == 0) {
-                        mAsyncTask = new DoWork(DoWorkFragment.this);
-                        mAsyncTask.execute(mNumberOfFiles);
-                    } else {
-                        if (mAsyncTask != null) {
-                            mAsyncTask.cancel(true);
-                            hideProgressBar();
+                        String label = (String) ((Button) v).getText();
+                        String strStart = getResources().getString(R.string.button_start_scan_label);
+                        if (label.compareToIgnoreCase(strStart) == 0) {
+                            mAsyncTask = new DoWork(DoWorkFragment.this);
+                            mAsyncTask.execute(files);
+                        } else {
+                            if (mAsyncTask != null) {
+                                mAsyncTask.cancel(true);
+                                hideProgressBar();
+                            }
                         }
                     }
                 }
@@ -167,13 +178,13 @@ public class DoWorkFragment extends Fragment {
 
     public void updateProgress(int value) {
         if(mProgressBar != null) {
-            Log.i(TAG, "progress:" + value);
+            //Log.i(TAG, "progress:" + value);
             mProgressBar.setProgress(value);
         }
     }
 
     /**
-     * Helper method to
+     * Helper method to determine if async task is running.
      * @param task
      * @return
      */
