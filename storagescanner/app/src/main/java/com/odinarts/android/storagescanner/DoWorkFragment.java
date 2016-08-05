@@ -1,10 +1,13 @@
 package com.odinarts.android.storagescanner;
 
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 public class DoWorkFragment extends Fragment {
     public static final String TAG = "OA.DoWorkFragment";
     public static final int REQUEST_READWRITE_STORAGE = 1;
+    public static final int NOTIFICATION_ID = 1;
 
     /** Background worker. */
     private DoWork mAsyncTask;
@@ -30,13 +34,15 @@ public class DoWorkFragment extends Fragment {
     private View mMainView;
     private ProgressBar mProgressBar;
     private ScannerDbHelper mDbHelper;
-    private NotificationManager mNotifyManager;
 
     /** Number of files on exteranl storage. */
     private int mNumberOfFiles;
 
     /** Number of processed files on exteranl storage. */
     private int mNumProcessedFiles;
+
+    private NotificationManager mNotificationManager;
+    private Builder mBuilder;
 
     public DoWorkFragment() {}
 
@@ -102,9 +108,17 @@ public class DoWorkFragment extends Fragment {
                         String label = (String) ((Button) v).getText();
                         String strStart = getResources().getString(R.string.button_start_scan_label);
                         if (label.compareToIgnoreCase(strStart) == 0) {
+                            // Setup notification.
+                            mNotificationManager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                            mBuilder = new NotificationCompat.Builder(getActivity());
+                            mBuilder.setContentTitle(getString(R.string.scan_notification_title))
+                                    .setContentText(getString(R.string.scan_notification_text))
+                                    .setSmallIcon(R.drawable.cast_ic_notification_connecting);
+
                             mAsyncTask = new DoWork(DoWorkFragment.this);
                             mAsyncTask.execute(files);
-                        } else {
+
+                        } else {    // Stop process.
                             if (mAsyncTask != null) {
                                 mAsyncTask.cancel(true);
                                 hideProgressBar();
@@ -140,7 +154,6 @@ public class DoWorkFragment extends Fragment {
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
     }
 
     public void showProgressBar() {
@@ -150,17 +163,7 @@ public class DoWorkFragment extends Fragment {
         mProgressBar.setVisibility(View.VISIBLE);
         Button button = (Button) mMainView.findViewById(R.id.button_start_scan);
         button.setText(R.string.button_stop_scan_label);
-        //progress.setIndeterminate(true);
-/*
-        mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mBuilder = new NotificationCompat.Builder(MainActivity.this);
-        mBuilder.setContentTitle("Download")
-                .setContentText("Download in progress")
-                .setSmallIcon(R.drawable.ic_download);
-
-        new Downloader().execute();
-*/
-        }
+    }
 
     public void hideProgressBar() {
         //ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.progress_bar);
@@ -176,10 +179,15 @@ public class DoWorkFragment extends Fragment {
         //resultView.setText(s);
     }
 
+    /**
+     * Update progress. Called by async task. Update progress bar and notification.
+     */
     public void updateProgress(int value) {
         if(mProgressBar != null) {
             Log.i(TAG, "progress:" + value);
             mProgressBar.setProgress(value);
+            mBuilder.setProgress(mNumberOfFiles, value, false);
+            mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         }
     }
 
@@ -207,7 +215,9 @@ public class DoWorkFragment extends Fragment {
      */
     public void backButtonWasPressed() {
         Log.i(TAG, "Back button was pressed. Stop scanning.");
-        mAsyncTask.cancel(true);
-        hideProgressBar();
+        if(mAsyncTask != null) {
+            mAsyncTask.cancel(true);
+            hideProgressBar();
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.odinarts.android.storagescanner;
 
-
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -26,6 +25,7 @@ public class DoWork extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
         ArrayList<File> files = (ArrayList<File>)params[0];
+
         HashMap<String, Integer> hashExtensions = new HashMap<String, Integer>();
 
         ScannerDbHelper dbHelper = new ScannerDbHelper(mContainer.getActivity());
