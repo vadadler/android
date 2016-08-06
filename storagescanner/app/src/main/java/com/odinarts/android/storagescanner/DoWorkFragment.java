@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.odinarts.android.storagescanner.chart.HorizontalBarChartActivity;
 import com.odinarts.android.storagescanner.chart.PieChartActivity;
 import com.odinarts.android.storagescanner.db.ScannerDbHelper;
+import com.odinarts.android.storagescanner.model.Extension;
+import com.odinarts.android.storagescanner.model.FileData;
 
 import java.util.ArrayList;
 
@@ -147,7 +149,7 @@ public class DoWorkFragment extends Fragment {
         mProgressBar = (ProgressBar)mMainView.findViewById(R.id.progress_bar);
         mDbHelper = new ScannerDbHelper(getActivity());
 
-        hideButtons();
+        //hideButtons();
         setRetainInstance(true);
 
         return mMainView;
@@ -220,6 +222,8 @@ public class DoWorkFragment extends Fragment {
                 mBuilder.setContentText(getString(R.string.scan_notification_done_text))
                         .setSmallIcon(R.drawable.cast_ic_notification_on)
                         .setProgress(0, 0, false);
+
+                buildReportDataset();
             }
             else if(value == Utils.TASK_CANCELLED) {
                 // Scan cancelled. Update notification bar. Delete all data.
@@ -268,6 +272,8 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void onLargestFilesClick(View v) {
+        // TODO: temp call
+        buildReportDataset();
         Intent i = new Intent(getActivity(), HorizontalBarChartActivity.class);
         startActivity(i);
     }
@@ -292,5 +298,17 @@ public class DoWorkFragment extends Fragment {
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Here will be JSON.stringified) string");
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_results)));
+    }
+
+    /**
+     * Query database and build report JSON object.
+     */
+    private void buildReportDataset() {
+        if(mDbHelper != null) {
+            // Get data for top longest files.
+            ArrayList<FileData> results = mDbHelper.getTopFiles();
+            ArrayList<Extension> resultsExt = mDbHelper.getTopExtensions();
+            Log.i(TAG, results.toString());
+        }
     }
 }

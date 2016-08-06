@@ -2,11 +2,14 @@ package com.odinarts.android.storagescanner.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.odinarts.android.storagescanner.db.ExtensionsContract.ExtensionsEntry;
 import com.odinarts.android.storagescanner.db.FilesContract.FilesEntry;
+import com.odinarts.android.storagescanner.model.Extension;
+import com.odinarts.android.storagescanner.model.FileData;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -73,5 +76,44 @@ public class ScannerDbHelper extends SQLiteOpenHelper {
 
             db.insert(FilesEntry.TABLE_NAME, null, values);
         }
+
+        db.close();
+    }
+
+    /**
+     * Get 10 longest files.
+     * TODO: parameterize query.
+     */
+    public ArrayList<FileData> getTopFiles() {
+        ArrayList<FileData> results = new ArrayList<FileData>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor;
+
+        try {
+            cursor = db.rawQuery("select name, path, length from files order by length desc limit 10", null);
+            if (cursor != null ) {
+                if  (cursor.moveToFirst()) {
+                    do {
+                        String name = cursor.getString(cursor.getColumnIndex("name"));
+                        String path = cursor.getString(cursor.getColumnIndex("path"));
+                        long length = cursor.getLong(cursor.getColumnIndex("length"));
+                        results.add(new FileData(name, path, length));
+                    } while (cursor.moveToNext());
+                }
+            }
+        }
+        catch(Exception e) {
+
+        }
+        finally {
+            db.close();
+            return results;
+        }
+    }
+
+    public ArrayList<Extension> getTopExtensions() {
+        ArrayList<Extension> results = new ArrayList<Extension>();
+
+        return results;
     }
 }

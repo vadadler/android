@@ -48,6 +48,7 @@ public class DoWork extends AsyncTask {
             String path = file.getPath();
             long length = file.length();
             String extension = Utils.getFileExtension(file);
+            Log.i(TAG, extension);
 
             values.put(FilesEntry.COLUMN_NAME, name);
             values.put(FilesEntry.COLUMN_PATH, path);
