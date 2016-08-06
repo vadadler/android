@@ -11,4 +11,6 @@
     <string name="button_extensions">Show extensions analysis</string>
     <string name="button_share">Share results</string>
     <string name="button_average_size">Show average file size</string>
+    <string name="share_results">Share results with...</string>
+
 </resources>

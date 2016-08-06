@@ -116,7 +116,7 @@ public class DoWork extends AsyncTask {
         if(mContainer!=null && mContainer.getActivity()!=null) {
             mContainer.updateProgress(Utils.TASK_CANCELLED);
             mContainer.hideProgressBar();
-            mContainer.showButtons();
+            mContainer.hideButtons();
             mContainer = null;
         }
     }

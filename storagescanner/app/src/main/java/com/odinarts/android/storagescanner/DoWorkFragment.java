@@ -281,7 +281,16 @@ public class DoWorkFragment extends Fragment {
 
     }
 
+    /**
+     * Use Android chooser to let user pick which app to use
+     * to share results.
+     * Results are shared as stringified JSON.
+     */
     public void onShareResultsClick(View v) {
-
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Here will be JSON.stringified) string");
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_results)));
     }
 }
