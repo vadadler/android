@@ -3,6 +3,7 @@ package com.odinarts.android.storagescanner;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends FragmentActivity {
     public static final String TAG = "OA.MainActivity";
@@ -19,6 +20,7 @@ public class MainActivity extends FragmentActivity {
         mFragment = new DoWorkFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mFragment).commit();
+
     }
 
     @Override
@@ -26,4 +28,21 @@ public class MainActivity extends FragmentActivity {
         super.onBackPressed();
         mFragment.backButtonWasPressed();
     }
+
+    public void onLargestFilesClick(View v) {
+        mFragment.onLargestFilesClick(v);
+    }
+
+    public void onExtensionsClick(View v) {
+        mFragment.onExtensionsClick(v);
+    }
+
+    public void onFileAverageSizeClick(View v) {
+        mFragment.onFileAverageSizeClick(v);
+    }
+
+    public void onShareResultsClick(View v) {
+        mFragment.onShareResultsClick(v);
+    }
+
 }

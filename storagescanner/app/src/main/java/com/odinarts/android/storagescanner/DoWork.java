@@ -82,6 +82,7 @@ public class DoWork extends AsyncTask {
         if(mContainer!=null && mContainer.getActivity()!=null) {
             mContainer.updateProgress(Utils.TASK_COMPLETED);
             mContainer.hideProgressBar();
+            mContainer.showButtons();
             mContainer = null;
         }
     }
@@ -97,6 +98,7 @@ public class DoWork extends AsyncTask {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Log.i(TAG, dbHelper.getDatabaseName());
 
+            mContainer.hideButtons();
             mContainer.showProgressBar();
         }
     }
@@ -114,6 +116,7 @@ public class DoWork extends AsyncTask {
         if(mContainer!=null && mContainer.getActivity()!=null) {
             mContainer.updateProgress(Utils.TASK_CANCELLED);
             mContainer.hideProgressBar();
+            mContainer.showButtons();
             mContainer = null;
         }
     }

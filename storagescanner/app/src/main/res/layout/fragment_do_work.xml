@@ -6,7 +6,7 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_start_scan_label"
         android:id="@+id/button_start_scan"
@@ -22,4 +22,45 @@
         android:layout_below="@+id/button_start_scan"
         android:layout_centerHorizontal="true"
         android:visibility="gone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_share"
+        android:id="@+id/button_file_average_size"
+        android:onClick="onShareResultsClick"
+        android:layout_below="@+id/button_start_scan"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_largest_files"
+        android:id="@+id/button_largest_files"
+        android:onClick="onLargestFilesClick"
+        android:layout_below="@+id/button_extensions"
+        android:layout_toRightOf="@+id/progress_bar"
+        android:layout_toEndOf="@+id/progress_bar"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_extensions"
+        android:id="@+id/button_extensions"
+        android:onClick="onExtensionsClick"
+        android:layout_below="@+id/button_file_average_size"
+        android:layout_toRightOf="@+id/progress_bar"
+        android:layout_toEndOf="@+id/progress_bar"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_average_size"
+        android:id="@+id/button_share_results"
+        android:onClick="onFileAverageSizeClick"
+        android:layout_below="@+id/button_largest_files"
+        android:layout_toRightOf="@+id/progress_bar"
+        android:layout_toEndOf="@+id/progress_bar"/>
+
 </RelativeLayout>

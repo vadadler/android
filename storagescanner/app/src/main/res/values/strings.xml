@@ -7,4 +7,8 @@
     <string name="scan_notification_text">Scann in progress</string>
     <string name="scan_notification_done_text">Scan completed</string>
     <string name="scan_notification_cancelled_text">Scan cancelled</string>
+    <string name="button_largest_files">Show largest files</string>
+    <string name="button_extensions">Show extensions analysis</string>
+    <string name="button_share">Share results</string>
+    <string name="button_average_size">Show average file size</string>
 </resources>

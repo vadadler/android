@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.odinarts.android.storagescanner.chart.HorizontalBarChartActivity;
+import com.odinarts.android.storagescanner.chart.PieChartActivity;
 import com.odinarts.android.storagescanner.db.ScannerDbHelper;
 
 import java.util.ArrayList;
@@ -143,10 +145,11 @@ public class DoWorkFragment extends Fragment {
         });
 
         mProgressBar = (ProgressBar)mMainView.findViewById(R.id.progress_bar);
-
         mDbHelper = new ScannerDbHelper(getActivity());
 
+        hideButtons();
         setRetainInstance(true);
+
         return mMainView;
     }
 
@@ -172,7 +175,6 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void showProgressBar() {
-        //ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.progress_bar);
         mProgressBar.setMax(mNumberOfFiles);
         mProgressBar.setProgress(mNumProcessedFiles);
         mProgressBar.setVisibility(View.VISIBLE);
@@ -188,6 +190,22 @@ public class DoWorkFragment extends Fragment {
         }
     }
 
+    /**
+     * TODO: put buttons inside a container to manage visibility only for one element.
+     */
+    public void showButtons() {
+        ((Button)mMainView.findViewById(R.id.button_share_results)).setVisibility(View.VISIBLE);
+        ((Button)mMainView.findViewById(R.id.button_largest_files)).setVisibility(View.VISIBLE);
+        ((Button)mMainView.findViewById(R.id.button_extensions)).setVisibility(View.VISIBLE);
+        ((Button)mMainView.findViewById(R.id.button_file_average_size)).setVisibility(View.VISIBLE);
+    }
+
+    public void hideButtons() {
+        ((Button)mMainView.findViewById(R.id.button_share_results)).setVisibility(View.GONE);
+        ((Button)mMainView.findViewById(R.id.button_largest_files)).setVisibility(View.GONE);
+        ((Button)mMainView.findViewById(R.id.button_extensions)).setVisibility(View.GONE);
+        ((Button)mMainView.findViewById(R.id.button_file_average_size)).setVisibility(View.GONE);
+    }
     /**
      * Update progress. Called by async task. Update progress bar and notification.
      *
@@ -247,5 +265,23 @@ public class DoWorkFragment extends Fragment {
             mAsyncTask.cancel(true);
             hideProgressBar();
         }
+    }
+
+    public void onLargestFilesClick(View v) {
+        Intent i = new Intent(getActivity(), HorizontalBarChartActivity.class);
+        startActivity(i);
+    }
+
+    public void onExtensionsClick(View v) {
+        Intent i = new Intent(getActivity(), PieChartActivity.class);
+        startActivity(i);
+    }
+
+    public void onFileAverageSizeClick(View v) {
+
+    }
+
+    public void onShareResultsClick(View v) {
+
     }
 }
