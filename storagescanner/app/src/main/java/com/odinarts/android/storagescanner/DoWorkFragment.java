@@ -43,6 +43,7 @@ public class DoWorkFragment extends Fragment {
     /** Number of processed files on exteranl storage. */
     private int mNumProcessedFiles;
 
+    /** Notifications related members. */
     private NotificationManager mNotificationManager;
     private Builder mBuilder;
 
@@ -143,6 +144,8 @@ public class DoWorkFragment extends Fragment {
 
         mProgressBar = (ProgressBar)mMainView.findViewById(R.id.progress_bar);
 
+        mDbHelper = new ScannerDbHelper(getActivity());
+
         setRetainInstance(true);
         return mMainView;
     }
@@ -201,9 +204,11 @@ public class DoWorkFragment extends Fragment {
                         .setProgress(0, 0, false);
             }
             else if(value == Utils.TASK_CANCELLED) {
+                // Scan cancelled. Update notification bar. Delete all data.
                 mBuilder.setContentText(getString(R.string.scan_notification_cancelled_text))
                         .setSmallIcon(R.drawable.cast_ic_notification_disconnect)
                         .setProgress(0, 0, false);
+                mDbHelper.deleteData();
             }
             else {
                 mProgressBar.setProgress(value);
