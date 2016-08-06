@@ -31,3 +31,7 @@ Functional Acceptance Criteria:
   * Basic support for prompting to allow access to external storage. 
   * Decline perminssion is not supported in this release.
 * Sharing is done using standard Android chooser dialog. Data being shared is string representation of JSON formatted results.
+
+**Testing and debugging notes**
+
+* Testing is done on Nexus 5 running 6.0.1
