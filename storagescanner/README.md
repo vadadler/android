@@ -30,3 +30,4 @@ Functional Acceptance Criteria:
 * Run time permissions.
   * Basic support for prompting to allow access to external storage. 
   * Decline perminssion is not supported in this release.
+* Sharing is done using standard Android chooser dialog. Data being shared is string representation of JSON formatted results.
