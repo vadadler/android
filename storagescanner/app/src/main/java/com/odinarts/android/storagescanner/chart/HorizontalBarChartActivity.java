@@ -2,6 +2,7 @@
 package com.odinarts.android.storagescanner.chart;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,29 +78,31 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
         // mChart.setDrawBarShadow(true);
 
         mChart.setDrawGridBackground(false);
+        mChart.setDrawValueAboveBar(false);
 
         XAxis xl = mChart.getXAxis();
         xl.setPosition(XAxisPosition.BOTTOM);
         xl.setTypeface(mTfLight);
-        xl.setDrawAxisLine(true);
+        xl.setDrawAxisLine(false);
         xl.setDrawGridLines(false);
-        xl.setGranularity(10f);
+        //xl.setGranularity(10f);
 
         YAxis yl = mChart.getAxisLeft();
         yl.setTypeface(mTfLight);
-        yl.setDrawAxisLine(true);
-        yl.setDrawGridLines(true);
+        yl.setDrawAxisLine(false);
+        yl.setDrawGridLines(false);
         yl.setAxisMinValue(0f); // this replaces setStartAtZero(true)
 //        yl.setInverted(true);
 
         YAxis yr = mChart.getAxisRight();
         yr.setTypeface(mTfLight);
-        yr.setDrawAxisLine(true);
+        yr.setDrawAxisLine(false);
         yr.setDrawGridLines(false);
-        yr.setAxisMinValue(0f); // this replaces setStartAtZero(true)
+        //yr.setAxisMinValue(0f); // this replaces setStartAtZero(true)
 //        yr.setInverted(true);
 
-        setData(10, 50);
+        //setData(10, 50);
+        setData(data);
         mChart.setFitBars(true);
         mChart.animateY(2500);
 
@@ -214,6 +217,37 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
     public void onStopTrackingTouch(SeekBar seekBar) {
         // TODO Auto-generated method stub
 
+    }
+
+    private void setData(ArrayList<FileData> data) {
+        float barWidth = 9f;
+        float spaceForBar = 10f;
+
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+
+        for (int i = 0; i < data.size(); i++) {
+            yVals1.add(new BarEntry(i * spaceForBar, data.get(i).getLength()));
+        }
+
+        BarDataSet set1 = new BarDataSet(yVals1, "10 largest files");
+        set1.setDrawValues(true);
+        set1.setValueTextColor(Color.BLACK);
+        set1.setValueTextSize(12f);
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(set1);
+
+        BarData bData = new BarData(dataSets);
+        bData.setValueTextSize(10f);
+        bData.setValueTypeface(mTfLight);
+        bData.setBarWidth(barWidth);
+        mChart.setData(bData);
+        mChart.setDescription("");    // Hide the description
+        mChart.getAxisLeft().setDrawLabels(false);
+        mChart.getAxisRight().setDrawLabels(false);
+        mChart.getXAxis().setDrawLabels(false);
+
+        mChart.getLegend().setEnabled(false);   // Hide the legend
     }
 
     private void setData(int count, float range) {

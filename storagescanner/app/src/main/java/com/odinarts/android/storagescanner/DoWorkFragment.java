@@ -37,6 +37,7 @@ public class DoWorkFragment extends Fragment {
     private DoWork mAsyncTask;
 
     ArrayList<FileData> mFileData;
+    ArrayList<Extension> mExtensionsData;
 
     private View mMainView;
     private ProgressBar mProgressBar;
@@ -110,6 +111,11 @@ public class DoWorkFragment extends Fragment {
                 else {
                     ArrayList<java.io.File> files = Utils.getAllFiles();
                     if (files != null) {
+                        // Purge db if exists.
+                        if(mDbHelper != null) {
+                            mDbHelper.deleteData();
+                        }
+
                         mNumberOfFiles = files.size();
                         Log.i(TAG, "Total number of files=" + mNumberOfFiles);
 
@@ -217,7 +223,7 @@ public class DoWorkFragment extends Fragment {
      */
     public void updateProgress(int value) {
         if(mProgressBar != null) {
-            Log.i(TAG, "progress:" + value);
+            //Log.i(TAG, "progress:" + value);
             if(value == Utils.TASK_COMPLETED) {
                 // Scan is complete. Change notification text and remove progress bar.
                 mBuilder.setContentText(getString(R.string.scan_notification_done_text))
@@ -281,7 +287,10 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void onExtensionsClick(View v) {
+        // TODO: temp call
+        buildReportDataset();
         Intent i = new Intent(getActivity(), PieChartActivity.class);
+        i.putParcelableArrayListExtra("data", mExtensionsData);
         startActivity(i);
     }
 
@@ -309,7 +318,7 @@ public class DoWorkFragment extends Fragment {
         if(mDbHelper != null) {
             // Get data for top longest files.
             mFileData = mDbHelper.getTopFiles();
-            ArrayList<Extension> resultsExt = mDbHelper.getTopExtensions();
+            mExtensionsData = mDbHelper.getTopExtensions();
             Log.i(TAG, mFileData.toString());
         }
     }

@@ -113,7 +113,27 @@ public class ScannerDbHelper extends SQLiteOpenHelper {
 
     public ArrayList<Extension> getTopExtensions() {
         ArrayList<Extension> results = new ArrayList<Extension>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor;
 
-        return results;
+        try {
+            cursor = db.rawQuery("select extension, count from extensions order by count desc limit 5", null);
+            if (cursor != null ) {
+                if  (cursor.moveToFirst()) {
+                    do {
+                        String extension = cursor.getString(cursor.getColumnIndex("extension"));
+                        int count = cursor.getInt(cursor.getColumnIndex("count"));
+                        results.add(new Extension(extension, count));
+                    } while (cursor.moveToNext());
+                }
+            }
+        }
+        catch(Exception e) {
+
+        }
+        finally {
+            db.close();
+            return results;
+        }
     }
 }

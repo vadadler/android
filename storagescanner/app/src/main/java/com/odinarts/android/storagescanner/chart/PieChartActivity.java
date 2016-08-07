@@ -30,6 +30,7 @@ import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.odinarts.android.storagescanner.R;
+import com.odinarts.android.storagescanner.model.Extension;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_piechart);
-
+/*
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
@@ -54,16 +55,20 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
         mSeekBarX.setProgress(4);
         mSeekBarY.setProgress(10);
+*/
+
+        // Get data.
+        ArrayList<Extension> data = this.getIntent().getParcelableArrayListExtra("data");
 
         mChart = (PieChart) findViewById(R.id.chart1);
-        mChart.setUsePercentValues(true);
+        mChart.setUsePercentValues(false);
         mChart.setDescription("");
         mChart.setExtraOffsets(5, 10, 5, 5);
 
         mChart.setDragDecelerationFrictionCoef(0.95f);
 
         mChart.setCenterTextTypeface(mTfLight);
-        mChart.setCenterText(generateCenterSpannableText());
+        mChart.setCenterText("Top 5 most used extensions");
 
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleColor(Color.WHITE);
@@ -81,19 +86,17 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         mChart.setRotationEnabled(true);
         mChart.setHighlightPerTapEnabled(true);
 
-        // mChart.setUnit(" €");
-        // mChart.setDrawUnitsInChart(true);
-
         // add a selection listener
         mChart.setOnChartValueSelectedListener(this);
 
-        setData(4, 100);
+        setData(data);
+        //setData(5, 100);
 
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         // mChart.spin(2000, 0, 360);
 
-        mSeekBarX.setOnSeekBarChangeListener(this);
-        mSeekBarY.setOnSeekBarChangeListener(this);
+        //mSeekBarX.setOnSeekBarChangeListener(this);
+        //mSeekBarY.setOnSeekBarChangeListener(this);
 
         Legend l = mChart.getLegend();
         l.setPosition(LegendPosition.RIGHT_OF_CHART);
@@ -102,7 +105,7 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         l.setYOffset(0f);
 
         // entry label styling
-        mChart.setEntryLabelColor(Color.WHITE);
+        mChart.setEntryLabelColor(Color.BLACK);
         mChart.setEntryLabelTypeface(mTfRegular);
         mChart.setEntryLabelTextSize(12f);
     }
@@ -185,6 +188,59 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
         setData(mSeekBarX.getProgress(), mSeekBarY.getProgress());
     }
 
+    private void setData(ArrayList<Extension> data) {
+
+        float mult = 100;
+
+        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        for (int i = 0; i < 5 ; i++) {
+            entries.add(new PieEntry(data.get(i).getCount(), data.get(i).getExtension()));
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "5 Top Extensions");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        PieData pd = new PieData(dataSet);
+        //pd.setValueFormatter();
+        pd.setValueTextSize(11f);
+        pd.setValueTextColor(Color.BLACK);
+        pd.setValueTypeface(mTfLight);
+        mChart.setData(pd);
+
+        // undo all highlights
+        mChart.highlightValues(null);
+
+        mChart.invalidate();
+    }
+
     private void setData(int count, float range) {
 
         float mult = range;
@@ -240,7 +296,7 @@ public class PieChartActivity extends DemoBase implements OnSeekBarChangeListene
 
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
+        SpannableString s = new SpannableString("Top 5 most used extensions\ndeveloped by Philipp Jahoda");
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
