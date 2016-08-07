@@ -28,6 +28,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.odinarts.android.storagescanner.R;
+import com.odinarts.android.storagescanner.model.FileData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +47,14 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_horizontalbarchart);
 
+        // Get data.
+        ArrayList<FileData> data = this.getIntent().getParcelableArrayListExtra("data");
+
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
-        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+        //mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+        //mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
         mChart = (HorizontalBarChart) findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
@@ -64,7 +68,7 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-        mChart.setMaxVisibleValueCount(60);
+        mChart.setMaxVisibleValueCount(10);
 
         // scaling can now only be done on x- and y-axis separately
         mChart.setPinchZoom(false);
@@ -95,16 +99,16 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
         yr.setAxisMinValue(0f); // this replaces setStartAtZero(true)
 //        yr.setInverted(true);
 
-        setData(12, 50);
+        setData(10, 50);
         mChart.setFitBars(true);
         mChart.animateY(2500);
 
         // setting data
-        mSeekBarY.setProgress(50);
-        mSeekBarX.setProgress(12);
+        //mSeekBarY.setProgress(50);
+        //mSeekBarX.setProgress(12);
 
-        mSeekBarY.setOnSeekBarChangeListener(this);
-        mSeekBarX.setOnSeekBarChangeListener(this);
+        //mSeekBarY.setOnSeekBarChangeListener(this);
+        //mSeekBarX.setOnSeekBarChangeListener(this);
 
         Legend l = mChart.getLegend();
         l.setPosition(LegendPosition.BELOW_CHART_LEFT);

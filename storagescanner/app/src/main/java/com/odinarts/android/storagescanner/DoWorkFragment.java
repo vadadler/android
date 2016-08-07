@@ -36,6 +36,7 @@ public class DoWorkFragment extends Fragment {
     /** Background worker. */
     private DoWork mAsyncTask;
 
+    ArrayList<FileData> mFileData;
 
     private View mMainView;
     private ProgressBar mProgressBar;
@@ -275,6 +276,7 @@ public class DoWorkFragment extends Fragment {
         // TODO: temp call
         buildReportDataset();
         Intent i = new Intent(getActivity(), HorizontalBarChartActivity.class);
+        i.putParcelableArrayListExtra("data", mFileData);
         startActivity(i);
     }
 
@@ -306,9 +308,9 @@ public class DoWorkFragment extends Fragment {
     private void buildReportDataset() {
         if(mDbHelper != null) {
             // Get data for top longest files.
-            ArrayList<FileData> results = mDbHelper.getTopFiles();
+            mFileData = mDbHelper.getTopFiles();
             ArrayList<Extension> resultsExt = mDbHelper.getTopExtensions();
-            Log.i(TAG, results.toString());
+            Log.i(TAG, mFileData.toString());
         }
     }
 }

@@ -1,6 +1,9 @@
 package com.odinarts.android.storagescanner.model;
 
-public class FileData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class FileData implements Parcelable {
     private int mId;
     private String mName;
     private String mPath;
@@ -53,5 +56,30 @@ public class FileData {
 
     public long getLength() {
         return mLength;
+    }
+
+    // Parcelable implementation.
+    public static final Parcelable.Creator<FileData> CREATOR = new Creator<FileData>() {
+        public FileData createFromParcel(Parcel source) {
+            FileData mFileData = new FileData();
+            mFileData.mName = source.readString();
+            mFileData.mPath = source.readString();
+            mFileData.mLength = source.readLong();
+            return mFileData;
+        }
+
+        public FileData[] newArray(int size) {
+            return new FileData[size];
+        }
+    };
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(mName);
+        parcel.writeString(mPath);
+        parcel.writeLong(mLength);
     }
 }

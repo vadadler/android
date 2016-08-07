@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentActivity;
 
 import com.odinarts.android.storagescanner.R;
 
-//import com.xxmassdeveloper.mpchartexample.R;
-
 /**
  * Baseclass of all Activities of the Demo Application.
  * 
