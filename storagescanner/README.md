@@ -118,3 +118,19 @@ Functional Acceptance Criteria:
 **Testing and debugging notes**
 
 * Testing is done on Nexus 5 running 6.0.1
+* To test Back button functionality.
+  * In Android Studio setup logging filter to **OA.**
+  * Start scan.
+  * Observe messages in Logcat monitor similar to below
+```
+08-07 17:33:47.202 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
+08-07 17:33:47.206 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
+08-07 17:33:47.211 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
+08-07 17:33:47.222 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
+```
+  * Press Back button and observe the following two messages indicating application had stopped.
+```
+08-07 17:33:47.251 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
+08-07 17:33:47.257 17748-17748/com.odinarts.android.storagescanner I/OA.DoWorkFragment: Back button was pressed. Stop scanning.
+08-07 17:33:47.268 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: Work is cancelled
+```
