@@ -113,6 +113,7 @@ Functional Acceptance Criteria:
 * To present data about 10 longest files and 5 most used extesions [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) package is used. 
   * 10 biggest files analysis is presented as horizontal bar chart.
   * 5 most frequently used extensions analysis is represented as pie chart.
+  ![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/top5extensions.png)
 
 **Testing and debugging notes**
 
