@@ -37,7 +37,6 @@ public class DoWorkFragment extends Fragment {
 
     /** Background worker. */
     private DoWork mAsyncTask;
-    private DoWork mAsyncTask;
 
     /** Data used to feed charts. */
     private ArrayList<FileData> mFileData;
