@@ -111,6 +111,10 @@ public class ScannerDbHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Get list of top 5 most frequently used file extensions.
+     * @return
+     */
     public ArrayList<Extension> getTopExtensions() {
         ArrayList<Extension> results = new ArrayList<Extension>();
         SQLiteDatabase db = getReadableDatabase();
@@ -134,6 +138,31 @@ public class ScannerDbHelper extends SQLiteOpenHelper {
         finally {
             db.close();
             return results;
+        }
+    }
+
+    /**
+     * Get anverage file length.
+     * @return
+     */
+    public long getAverageFileSize() {
+        long result = 0;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor;
+
+        try {
+            cursor = db.rawQuery("select avg(length) from files", null);
+            if (cursor != null ) {
+                cursor.moveToFirst();
+                result = cursor.getLong(0);
+            }
+        }
+        catch(Exception e) {
+
+        }
+        finally {
+            db.close();
+            return result;
         }
     }
 }

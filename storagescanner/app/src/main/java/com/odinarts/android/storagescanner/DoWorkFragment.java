@@ -38,6 +38,7 @@ public class DoWorkFragment extends Fragment {
 
     ArrayList<FileData> mFileData;
     ArrayList<Extension> mExtensionsData;
+    long mAverageFileSize;
 
     private View mMainView;
     private ProgressBar mProgressBar;
@@ -294,7 +295,16 @@ public class DoWorkFragment extends Fragment {
         startActivity(i);
     }
 
+    /**
+     * Show toast with average file size.
+     * @param v
+     */
     public void onFileAverageSizeClick(View v) {
+        // TODO: temp call
+        buildReportDataset();
+        Toast.makeText(getActivity(),
+                getResources().getString(R.string.average_length) + mAverageFileSize,
+                Toast.LENGTH_LONG).show();
 
     }
 
@@ -312,14 +322,13 @@ public class DoWorkFragment extends Fragment {
     }
 
     /**
-     * Query database and build report JSON object.
+     * Query database and store results in ArrayLists and long.
      */
     private void buildReportDataset() {
         if(mDbHelper != null) {
-            // Get data for top longest files.
             mFileData = mDbHelper.getTopFiles();
             mExtensionsData = mDbHelper.getTopExtensions();
-            Log.i(TAG, mFileData.toString());
+            mAverageFileSize = mDbHelper.getAverageFileSize();
         }
     }
 }
