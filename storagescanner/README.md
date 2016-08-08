@@ -20,6 +20,13 @@ Functional Acceptance Criteria:
 
 **Architectual and implementation notes**
 
+* Screenshots
+* 
+![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/main_screen.png "Main screen")
+![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/progress.png "Progress")
+![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/notification.png "Notification")
+![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/screen_after_scan.png "Screen after scan")
+
 * Fragment and AsyncTask are used to achieve background processing and application state preservation during configuration changes (screen rotation)
 * SQLite is used to store statistial data. It is used as source for analysis. Two tables are used: files (columns: name, path, length) and extenstions (columns: extension and count)
 * To support Back button click functionality main activity is derived from FragmentActivity which keeps reference to the fragment.
@@ -111,9 +118,12 @@ Functional Acceptance Criteria:
 }
 ```
 * To present data about 10 longest files and 5 most used extesions [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) package is used. 
-  * 10 biggest files analysis is presented as horizontal bar chart.
+  * 10 biggest files analysis is presented as horizontal bar chart (**work in progress**)
+  
+ ![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/files.png "10 longest files")
   * 5 most frequently used extensions analysis is represented as pie chart.
-  ![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/top5extensions.png)
+  
+ ![alt text](https://github.com/vadadler/android/blob/master/storagescanner/images/top5extensions.png "5 top extensions")
 
 **Testing and debugging notes**
 
