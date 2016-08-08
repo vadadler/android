@@ -123,7 +123,7 @@ public class DoWorkFragment extends Fragment {
                         mNumberOfFiles = files.size();
                         Log.i(TAG, "Total number of files=" + mNumberOfFiles);
 
-                        String label = (String) ((Button) v).getText();
+                        String label = (String)((Button) v).getText();
                         String strStart = getResources().getString(R.string.button_start_scan_label);
                         if (label.compareToIgnoreCase(strStart) == 0) {
                             // Setup notification. Return to activity when notification is clicked.
@@ -161,6 +161,8 @@ public class DoWorkFragment extends Fragment {
         mDbHelper = new ScannerDbHelper(getActivity());
 
         hideButtons();
+
+        // Retain instance data between configuration changes.
         setRetainInstance(true);
 
         return mMainView;
@@ -227,7 +229,7 @@ public class DoWorkFragment extends Fragment {
      */
     public void updateProgress(int value) {
         if(mProgressBar != null) {
-            //Log.i(TAG, "progress:" + value);
+            Log.i(TAG, "progress:" + value);
             if(value == Utils.TASK_COMPLETED) {
                 // Scan is complete. Change notification text and remove progress bar.
                 mBuilder.setContentText(getString(R.string.scan_notification_done_text))

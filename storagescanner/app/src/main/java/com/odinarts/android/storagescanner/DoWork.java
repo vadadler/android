@@ -49,7 +49,7 @@ public class DoWork extends AsyncTask {
             long length = file.length();
             String extension = Utils.getFileExtension(file);
             if(extension.length() > 0) {
-                Log.i(TAG, extension);
+                //Log.i(TAG, extension);
 
                 values.put(FilesEntry.COLUMN_NAME, name);
                 values.put(FilesEntry.COLUMN_PATH, path);
@@ -115,7 +115,6 @@ public class DoWork extends AsyncTask {
     }
     @Override
     protected void onCancelled() {
-        super.onCancelled();
         if(mContainer!=null && mContainer.getActivity()!=null) {
             mContainer.updateProgress(Utils.TASK_CANCELLED);
             mContainer.hideProgressBar();
