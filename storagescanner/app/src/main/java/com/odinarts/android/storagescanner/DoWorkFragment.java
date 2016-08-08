@@ -160,7 +160,7 @@ public class DoWorkFragment extends Fragment {
         mProgressBar = (ProgressBar)mMainView.findViewById(R.id.progress_bar);
         mDbHelper = new ScannerDbHelper(getActivity());
 
-        //hideButtons();
+        hideButtons();
         setRetainInstance(true);
 
         return mMainView;
@@ -283,16 +283,12 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void onLargestFilesClick(View v) {
-        // TODO: temp call
-        buildReportDataset();
         Intent i = new Intent(getActivity(), HorizontalBarChartActivity.class);
         i.putParcelableArrayListExtra("data", mFileData);
         startActivity(i);
     }
 
     public void onExtensionsClick(View v) {
-        // TODO: temp call
-        buildReportDataset();
         Intent i = new Intent(getActivity(), PieChartActivity.class);
         i.putParcelableArrayListExtra("data", mExtensionsData);
         startActivity(i);
@@ -303,10 +299,8 @@ public class DoWorkFragment extends Fragment {
      * @param v
      */
     public void onFileAverageSizeClick(View v) {
-        // TODO: temp call
-        buildReportDataset();
         Toast.makeText(getActivity(),
-                getResources().getString(R.string.average_length) + mAverageFileSize,
+                getResources().getString(R.string.average_length) + mAverageFileSize + " bytes",
                 Toast.LENGTH_LONG).show();
 
     }
@@ -346,7 +340,7 @@ public class DoWorkFragment extends Fragment {
         catch (Exception e) {
 
         }
-        
+
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, jsonObject.toString());

@@ -12,5 +12,5 @@
     <string name="button_share">Share results</string>
     <string name="button_average_size">Show average file size</string>
     <string name="share_results">Share results with...</string>
-    <string name="average_length">Average file length size is </string>
+    <string name="average_length">Average file length is </string>
 </resources>
