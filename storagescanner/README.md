@@ -31,7 +31,7 @@ Functional Acceptance Criteria:
   * Basic support for prompting to allow access to external storage. 
   * Decline perminssion is not supported in this release.
 * Sharing is done using standard Android chooser dialog. Data being shared is string representation of JSON formatted results.
-* To present data about 10 longest files and 5 most used extesions MPAndroidChart[https://github.com/PhilJay/MPAndroidChart] package is used. 
+* To present data about 10 longest files and 5 most used extesions [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) package is used. 
   * 10 biggest files analysis is presented as horizontal bar chart.
   * 5 most frequently used extensions analysis is represented as pie chart.
 
