@@ -30,7 +30,86 @@ Functional Acceptance Criteria:
 * Run time permissions.
   * Basic support for prompting to allow access to external storage. 
   * Decline perminssion is not supported in this release.
-* Sharing is done using standard Android chooser dialog. Data being shared is string representation of JSON formatted results.
+* Sharing is done using standard Android chooser dialog. Data being shared is string representation of JSON formatted results. Here is a sample of data being sent as an extra:
+```json
+{
+  "average_length": 140428,
+  "extensions_data": [
+    {
+      "extension": "class",
+      "count": 357
+    },
+    {
+      "extension": "adoc",
+      "count": 244
+    },
+    {
+      "extension": "java",
+      "count": 136
+    },
+    {
+      "extension": "sql",
+      "count": 88
+    },
+    {
+      "extension": "xml",
+      "count": 46
+    }
+  ],
+  "files_data": [
+    {
+      "name": "contexthub-adminws-0.1.0.jar",
+      "path": "/storage/emulated/0/contexthub-adminws/bin/target/contexthub-adminws-0.1.0.jar",
+      "length": 65982404
+    },
+    {
+      "name": "contexthub-adminws-0.1.0.jar",
+      "path": "/storage/emulated/0/contexthub-adminws/target/contexthub-adminws-0.1.0.jar",
+      "length": 65982404
+    },
+    {
+      "name": "pack-a16bf5535bd043dfd05e9db1ceece23ab5ea2ee8.pack",
+      "path": "/storage/emulated/0/contexthub-adminws/.git/objects/pack/pack-a16bf5535bd043dfd05e9db1ceece23ab5ea2ee8.pack",
+      "length": 714240
+    },
+    {
+      "name": "contexthub-adminws-0.1.0.jar.original",
+      "path": "/storage/emulated/0/contexthub-adminws/bin/target/contexthub-adminws-0.1.0.jar.original",
+      "length": 244769
+    },
+    {
+      "name": "contexthub-adminws-0.1.0.jar.original",
+      "path": "/storage/emulated/0/contexthub-adminws/target/contexthub-adminws-0.1.0.jar.original",
+      "length": 244769
+    },
+    {
+      "name": "pack-a16bf5535bd043dfd05e9db1ceece23ab5ea2ee8.idx",
+      "path": "/storage/emulated/0/contexthub-adminws/.git/objects/pack/pack-a16bf5535bd043dfd05e9db1ceece23ab5ea2ee8.idx",
+      "length": 168400
+    },
+    {
+      "name": "index.html",
+      "path": "/storage/emulated/0/contexthub-adminws/bin/target/classes/static/docs/index.html",
+      "length": 122585
+    },
+    {
+      "name": "index.html",
+      "path": "/storage/emulated/0/contexthub-adminws/bin/target/generated-docs/index.html",
+      "length": 122585
+    },
+    {
+      "name": "index.html",
+      "path": "/storage/emulated/0/contexthub-adminws/target/classes/static/docs/index.html",
+      "length": 122585
+    },
+    {
+      "name": "index.html",
+      "path": "/storage/emulated/0/contexthub-adminws/target/generated-docs/index.html",
+      "length": 122585
+    }
+  ]
+}
+```
 * To present data about 10 longest files and 5 most used extesions [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) package is used. 
   * 10 biggest files analysis is presented as horizontal bar chart.
   * 5 most frequently used extensions analysis is represented as pie chart.
