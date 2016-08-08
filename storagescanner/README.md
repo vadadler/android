@@ -123,14 +123,14 @@ Functional Acceptance Criteria:
   * Start scan.
   * Observe messages in Logcat monitor similar to below
 ```
-08-07 17:33:47.202 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
-08-07 17:33:47.206 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
-08-07 17:33:47.211 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
-08-07 17:33:47.222 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
+08-08 07:50:48.942 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: progress:317
+08-08 07:50:48.966 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: progress:318
+08-08 07:50:48.976 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: progress:319
+08-08 07:50:48.990 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: progress:320
 ```
   * Press Back button and observe the following two messages indicating application had stopped.
 ```
-08-07 17:33:47.251 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: class
-08-07 17:33:47.257 17748-17748/com.odinarts.android.storagescanner I/OA.DoWorkFragment: Back button was pressed. Stop scanning.
+08-08 07:50:49.007 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: progress:321
+08-08 07:50:49.085 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: Back button was pressed. Stop scanning.
 08-07 17:33:47.268 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: Work is cancelled
 ```
