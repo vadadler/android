@@ -17,9 +17,11 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mFragment = new DoWorkFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, mFragment).commit();
+        if(savedInstanceState == null) {
+            mFragment = new DoWorkFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, mFragment).commit();
+        }
 
     }
 

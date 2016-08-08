@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
@@ -38,10 +37,12 @@ public class DoWorkFragment extends Fragment {
 
     /** Background worker. */
     private DoWork mAsyncTask;
+    private DoWork mAsyncTask;
 
-    ArrayList<FileData> mFileData;
-    ArrayList<Extension> mExtensionsData;
-    long mAverageFileSize;
+    /** Data used to feed charts. */
+    private ArrayList<FileData> mFileData;
+    private ArrayList<Extension> mExtensionsData;
+    private long mAverageFileSize;
 
     private View mMainView;
     private ProgressBar mProgressBar;
@@ -51,7 +52,7 @@ public class DoWorkFragment extends Fragment {
     private int mNumberOfFiles;
 
     /** Number of processed files on exteranl storage. */
-    private int mNumProcessedFiles;
+    private int mNumProcessedFiles = 0;
 
     /** Notifications related members. */
     private NotificationManager mNotificationManager;
@@ -60,22 +61,8 @@ public class DoWorkFragment extends Fragment {
     public DoWorkFragment() {}
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "OnCreate: " + Environment.getExternalStorageDirectory().getAbsolutePath());
-
-        // Hide or show progress bar.
-        if(isTaskRunning(mAsyncTask)) {
-            showProgressBar();
-        }
-        else {
-            hideProgressBar();
-        }
-
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.i(TAG, "OnActivityCreated");
         if(isTaskRunning(mAsyncTask)) {
             showProgressBar();
         }
@@ -190,6 +177,7 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void showProgressBar() {
+        Log.i(TAG, "showProgressBar");
         mProgressBar.setMax(mNumberOfFiles);
         mProgressBar.setProgress(mNumProcessedFiles);
         mProgressBar.setVisibility(View.VISIBLE);
@@ -198,6 +186,7 @@ public class DoWorkFragment extends Fragment {
     }
 
     public void hideProgressBar() {
+        Log.i(TAG, "hideProgressBar");
         if(mProgressBar != null) {
             mProgressBar.setVisibility(View.GONE);
             Button button = (Button) mMainView.findViewById(R.id.button_start_scan);
@@ -260,7 +249,7 @@ public class DoWorkFragment extends Fragment {
      * @return
      */
     protected boolean isTaskRunning(DoWork task) {
-        Log.i(TAG, "isTaskRunning");
+        Log.i(TAG, "isTaskRunning " + task);
 
         if(task == null ) {
             return false;
