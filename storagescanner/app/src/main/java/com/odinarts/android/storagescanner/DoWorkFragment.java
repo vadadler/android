@@ -26,6 +26,9 @@ import com.odinarts.android.storagescanner.db.ScannerDbHelper;
 import com.odinarts.android.storagescanner.model.Extension;
 import com.odinarts.android.storagescanner.model.FileData;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class DoWorkFragment extends Fragment {
@@ -314,9 +317,39 @@ public class DoWorkFragment extends Fragment {
      * Results are shared as stringified JSON.
      */
     public void onShareResultsClick(View v) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArrayFileData = new JSONArray();
+        JSONArray jsonArrayExtensionsData = new JSONArray();
+
+        try {
+            if (mExtensionsData != null) {
+                for (int i = 0; i < mExtensionsData.size(); i++) {
+                    jsonArrayExtensionsData.put(mExtensionsData.get(i).getJSONObject());
+                }
+            }
+
+            if (mFileData != null) {
+                for (int i = 0; i < mFileData.size(); i++) {
+                    jsonArrayFileData.put(mFileData.get(i).getJSONObject());
+                }
+            }
+
+            if (mAverageFileSize != 0) {
+                jsonObject.put("average_length", mAverageFileSize);
+            }
+
+            jsonObject.put("extensions_data", jsonArrayExtensionsData);
+            jsonObject.put("files_data", jsonArrayFileData);
+
+            Log.i(TAG, jsonObject.toString());
+        }
+        catch (Exception e) {
+
+        }
+        
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Here will be JSON.stringified) string");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, jsonObject.toString());
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_results)));
     }

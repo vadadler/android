@@ -3,6 +3,9 @@ package com.odinarts.android.storagescanner.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class FileData implements Parcelable {
     private int mId;
     private String mName;
@@ -56,6 +59,22 @@ public class FileData implements Parcelable {
 
     public long getLength() {
         return mLength;
+    }
+
+    /**
+     * Convert POJO to JSONObject.
+     * @return
+     */
+    public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("name", mName);
+            obj.put("path", mPath);
+            obj.put("length", mLength);
+        } catch (JSONException e) {
+
+        }
+        return obj;
     }
 
     // Parcelable implementation.

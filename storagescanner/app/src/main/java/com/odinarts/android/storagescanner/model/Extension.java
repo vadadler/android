@@ -3,6 +3,9 @@ package com.odinarts.android.storagescanner.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Extension implements Parcelable {
     private int mId;
     private String mExtension;
@@ -46,6 +49,20 @@ public class Extension implements Parcelable {
         return mCount;
     }
 
+    /**
+     * Convert POJO to JSONObject.
+     * @return
+     */
+    public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("extension", mExtension);
+            obj.put("count", mCount);
+        } catch (JSONException e) {
+
+        }
+        return obj;
+    }
     // Parcelable implementation.
     public static final Parcelable.Creator<Extension> CREATOR = new Creator<Extension>() {
         public Extension createFromParcel(Parcel source) {
