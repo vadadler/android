@@ -20,7 +20,10 @@ public class MainActivity extends FragmentActivity {
         if(savedInstanceState == null) {
             mFragment = new DoWorkFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, mFragment).commit();
+                    .add(R.id.fragment_container, mFragment, "DoWorkFragment").commit();
+        }
+        else {
+            mFragment = (DoWorkFragment) getSupportFragmentManager().findFragmentByTag("DoWorkFragment");
         }
 
     }
