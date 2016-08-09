@@ -144,3 +144,7 @@ Functional Acceptance Criteria:
 08-08 07:50:49.085 13918-13918/com.odinarts.android.storagescanner I/OA.DoWorkFragment: Back button was pressed. Stop scanning.
 08-07 17:33:47.268 17748-18528/com.odinarts.android.storagescanner I/OA.DoWork: Work is cancelled
 ```
+* To test Home button functionality.
+  * Start scan.
+  * Press Home button.
+  * Observe notification is active and scan continues.
