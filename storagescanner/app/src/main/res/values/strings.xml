@@ -4,7 +4,7 @@
     <string name="button_stop_scan_label">Stop scan</string>
     <string name="permission_denied">Without permission to access storage application is useless.</string>
     <string name="scan_notification_title">SD Card scanner</string>
-    <string name="scan_notification_text">Scann in progress</string>
+    <string name="scan_notification_text">Scan in progress</string>
     <string name="scan_notification_done_text">Scan completed</string>
     <string name="scan_notification_cancelled_text">Scan cancelled</string>
     <string name="button_largest_files">Show largest files</string>
