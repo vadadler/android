@@ -19,3 +19,7 @@ An exercise to show use of custom ListView items, ArrayAdapter, SQLite and view 
 ####Things to improve
 1. Persist Todo status (done/not done).
 2. Switch to use CursorAdapter.
+
+
+##StorageScanner
+A screening assessment given by a potential employer. In a nutshell, scan external storage and report the findings. Project page has all the details.
