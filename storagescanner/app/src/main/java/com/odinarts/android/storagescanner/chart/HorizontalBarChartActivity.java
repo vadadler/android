@@ -2,6 +2,7 @@
 package com.odinarts.android.storagescanner.chart;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.Log;
@@ -206,14 +207,15 @@ public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarCha
         }
 
         for (int i = 0; i < data.size(); i++) {
-            sets.add(i, new BarDataSet(entries.get(i), names.get(i)));
+            BarDataSet set = new BarDataSet(entries.get(i), names.toString());
+            set.setDrawValues(true);
+            set.setValueTextColor(Color.BLACK);
+            set.setValueTextSize(12f);
+
+            sets.add(i, set);
         }
 
 
-        //BarDataSet set1 = new BarDataSet(barEntry, "haha");
-        //set1.setDrawValues(true);
-        //set1.setValueTextColor(Color.BLACK);
-        //set1.setValueTextSize(12f);
 
         ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
         for (int i = 0; i < data.size(); i++) {
