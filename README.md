@@ -1,7 +1,7 @@
 # android
 Android related projects
 
-## iq
+## [iq](https://github.com/vadadler/android/tree/master/iq)
 iq does not stand for intelligence quotient. It stands for interview questions. While preparing to grind through the 
 process I decided to document my efforts.
 
