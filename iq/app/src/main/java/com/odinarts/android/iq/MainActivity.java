@@ -1,16 +1,19 @@
 package com.odinarts.android.iq;
 
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.Visibility;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.content.Context;
-import android.content.Intent;
+
+//import io.reactivex.android.schedulers.AndroidSchedulers;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MAX_STATUS = 100;
@@ -53,6 +56,48 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.mPBar.setVisibility(View.VISIBLE);
                 MyAsyncTask myTask = new MyAsyncTask();
                 myTask.execute();
+            }
+        });
+
+        // Replace AsyncTask with observable.
+        findViewById(R.id.buttonDownloadObservable).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                MainActivity.this.mPBar.setVisibility(View.VISIBLE);
+
+                Observable.create(new Observable.OnSubscribe<Integer>() {
+                    @Override
+                    public void call(Subscriber<? super Integer> subscriber) {
+                        for (mProgressStatus = 0; mProgressStatus < MAX_STATUS; mProgressStatus++) {
+                            try {
+                                Thread.sleep(100);
+                                subscriber.onNext(mProgressStatus);
+                            }
+                            catch (Exception e) {
+                                subscriber.onError(e);
+                            }
+                        }
+                        subscriber.onCompleted();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        mPBar.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        mPBar.setProgress(mProgressStatus);
+                    }
+                });
             }
         });
 
