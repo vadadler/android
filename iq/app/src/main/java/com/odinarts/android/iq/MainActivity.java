@@ -9,17 +9,21 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-//import io.reactivex.android.schedulers.AndroidSchedulers;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+
+//import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MAX_STATUS = 100;
     protected ProgressBar mPBar;
     protected int mProgressStatus = 0;
     private Handler mHandler = new Handler();
+    private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(final View v) {
                 MainActivity.this.mPBar.setVisibility(View.VISIBLE);
 
-                Observable.create(new Observable.OnSubscribe<Integer>() {
+                // Subscription returns from Observable.subscribe(Subscriber) to allow unsubscribing.
+                // Reference to Subscription stores instance of ActionSubscriber<T> which, among
+                // other things has three final objects: onNext, onError, onCompleted.
+                // Because of onNext, onError and onCompleted fields being final there is no clean
+                // way to nullify them. The problem is that calling unsubscribe() on a Subscriber
+                // only marks it as unsubscribed. Therefore, memory leak on unsubscibe().
+                // https://medium.com/engineering-brainly/how-to-leak-memory-with-subscriptions-in-rxjava-ae0ef01ad361
+                Subscription subscription = Observable.create(new Observable.OnSubscribe<Integer>() {
                     @Override
                     public void call(Subscriber<? super Integer> subscriber) {
                         for (mProgressStatus = 0; mProgressStatus < MAX_STATUS; mProgressStatus++) {
@@ -90,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mPBar.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -98,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                         mPBar.setProgress(mProgressStatus);
                     }
                 });
+
+                compositeSubscription.add(subscription);
             }
         });
 
@@ -154,6 +167,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        // clear() unsubscribes everything and then clears up the references.
+        compositeSubscription.clear();
+        super.onDestroy();
     }
 
     private class MyAsyncTask extends AsyncTask {
