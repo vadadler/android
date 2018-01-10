@@ -27,6 +27,14 @@
         android:layout_below="@+id/buttonAnr"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Observable with ProgressBar"
+        android:id="@+id/buttonDownloadObservable"
+        android:layout_below="@+id/buttonDownload"
+        android:layout_centerHorizontal="true" />
+
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="Background thread with progress"
         android:id="@+id/buttonBgThread"
-        android:layout_below="@+id/buttonDownload"
+        android:layout_below="@+id/buttonDownloadObservable"
         android:layout_centerHorizontal="true" />
 
     <Button
