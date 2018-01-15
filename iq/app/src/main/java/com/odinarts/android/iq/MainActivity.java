@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 Thread.sleep(100);
                                 subscriber.onNext(mProgressStatus);
+                                System.out.println("Thread onNext(): " + Thread.currentThread().getName());
                             }
                             catch (Exception e) {
                                 subscriber.onError(e);
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted() {
                         mPBar.setVisibility(View.INVISIBLE);
+                        System.out.println("Thread onCompleted(): " + Thread.currentThread().getName());
                     }
 
                     @Override
