@@ -19,7 +19,7 @@ https://github.com/googlesamples/android-architecture-components
 4. Regardless of the structure and organization you choose, you must use the following 3rd party
 dependencies in some way:
 * Retrofit 2
-* Butter Knife
+* ButterKnife
 * Dagger 2
 * RxJava 2 or Agera
 5. Write at least one unit test using JUnit and at least one ui test using Espresso.
@@ -47,5 +47,7 @@ I decided to build a news app based on API available at https://newsapi.org/. He
 
 ## Architecture ##
 
-Based on the requirements the following packages are being used:
+Based on the requirements the following packages are/will be be used:
 1. [Retrofit 2](http://square.github.io/retrofit/) Retrofit is a REST Client for Android and Java developed by Square. It makes it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice. This library is being used to GET news articles.
+2. [ButterKnife](https://github.com/JakeWharton/butterknife) is a viewbinding library for Android that uses annotation to generate boilerplate code.
+3. [Dagger 2](https://google.github.io/dagger/) is a fully static, compile-time dependency injection framework for both Java and Android.
