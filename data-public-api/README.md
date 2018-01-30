@@ -38,3 +38,14 @@ Some ideas:
 * Verify that no errors are found by lint
 * Provide good documentation
 * ???
+
+## What to build? ##
+
+I decided to build a news app based on API available at https://newsapi.org/. Here are some useful links:
+* You need a key. Get one [here](https://newsapi.org/register)
+* [Here](https://newsapi.org/docs) is documentation
+
+## Architecture ##
+
+Based on the requirements the following packages are being used:
+1. [Retrofit 2](http://square.github.io/retrofit/) Retrofit is a REST Client for Android and Java developed by Square. It makes it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice. This library is being used to GET news articles.
