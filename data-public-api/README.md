@@ -52,4 +52,4 @@ Based on the requirements the following packages are/will be be used:
 2. [ButterKnife](https://github.com/JakeWharton/butterknife) is a viewbinding library for Android that uses annotation to generate boilerplate code.
 3. [Dagger 2](https://google.github.io/dagger/) is a fully static, compile-time dependency injection framework for both Java and Android.
 4. [RxJava](https://github.com/ReactiveX/RxJava) and and [RxAndroid 2](https://github.com/ReactiveX/RxAndroid) RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM. RxAndroid is Android specific bindings for RxJava 2.
-
+5. [Mosby](https://github.com/sockeqwe/mosby) is library is to help building MVP based Android applicaitons. Mosby helps to handle screen orientation changes by introducing ViewState and retaining Presenters.
