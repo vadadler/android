@@ -53,3 +53,8 @@ Based on the requirements the following packages are/will be be used:
 3. [Dagger 2](https://google.github.io/dagger/) is a fully static, compile-time dependency injection framework for both Java and Android.
 4. [RxJava](https://github.com/ReactiveX/RxJava) and and [RxAndroid 2](https://github.com/ReactiveX/RxAndroid) RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM. RxAndroid is Android specific bindings for RxJava 2.
 5. [Mosby](https://github.com/sockeqwe/mosby) is library is to help building MVP based Android applicaitons. Mosby helps to handle screen orientation changes by introducing ViewState and retaining Presenters.
+
+## [MVP](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) or [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)? ##
+There are pros and cons for both architectual approaches. I decided to use MVP since I felt more comfortable with it.
+
+
