@@ -62,5 +62,5 @@ I decided to use Google News application as starting point.
 
 | Main Screen   | Main Screen Details |
 | ------------- |---------------------|
-|       |        |
+| ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/newsapp.png) | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/newsapp_parts.png)       |
 
