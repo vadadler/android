@@ -57,6 +57,12 @@ Based on the requirements the following packages are/will be be used:
 ## [MVP](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) or [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)? ##
 There are pros and cons for both architectual approaches. I decided to use MVP since I felt more comfortable with it.
 
+## Guidelines ##
+Below is list of guidelines I am trying to follow:
+1. Make views dumb and passive. By following [Passive View](https://martinfowler.com/eaaDev/PassiveScreen.html) pattern testability is being improved as well as separation of concerns is being enforced.
+2. Make presenter Android-free. Abstract presenter from implementation details (Android). By having pure Java implementation improves testability (no need of Android emulator).
+3. 
+
 ## Screens ##
 I decided to use Google News application as starting point.
 
