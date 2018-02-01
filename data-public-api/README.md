@@ -57,4 +57,10 @@ Based on the requirements the following packages are/will be be used:
 ## [MVP](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) or [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)? ##
 There are pros and cons for both architectual approaches. I decided to use MVP since I felt more comfortable with it.
 
+## Screens ##
+I decided to use Google News application as starting point.
+
+| Main Screen   | Main Screen Details |
+| ------------- |---------------------|
+|       |        |
 
