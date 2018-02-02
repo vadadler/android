@@ -70,3 +70,8 @@ I decided to use Google News application as starting point.
 | ------------- |---------------------|
 | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/newsapp.png) | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/newsapp_parts.png)       |
 
+## UML ##
+| Contract   | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/contract.png) |
+| ------------- |---------------------|
+
+
