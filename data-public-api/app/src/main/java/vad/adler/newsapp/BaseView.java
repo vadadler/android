@@ -16,7 +16,7 @@ package vad.adler.newsapp;
  * have to be called on onAttachedToWindow and onDetachedFromWindow. User actions, like button clicks,
  * will trigger corresponding methods in the Presenter, this being the one that decides what should
  * happen next.
- * @param <T>
+ * @param <T> Presenter
  */
 public interface BaseView<T> {
 

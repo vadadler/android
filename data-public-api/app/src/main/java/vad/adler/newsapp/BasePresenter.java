@@ -15,4 +15,9 @@ public interface BasePresenter {
      */
     void unsubscribe();
 
+    /**
+     * Get latest news from newsapi.org
+     */
+    void getNews();
+
 }
