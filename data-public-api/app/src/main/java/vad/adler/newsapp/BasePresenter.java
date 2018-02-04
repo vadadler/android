@@ -14,10 +14,4 @@ public interface BasePresenter {
      * Clear all subscriptions to Presenter.
      */
     void unsubscribe();
-
-    /**
-     * Get latest news from newsapi.org
-     */
-    void getNews();
-
 }

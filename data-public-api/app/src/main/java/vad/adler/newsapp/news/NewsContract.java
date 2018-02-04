@@ -12,6 +12,10 @@ public interface NewsContract {
     }
 
     interface Presenter extends BasePresenter {
+        /**
+         * Get latest news from newsapi.org
+         */
+        void getNews();
 
     }
 }
