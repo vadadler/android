@@ -1,22 +1,34 @@
 package vad.adler.newsapp.data;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 
 /**
  * Implementation of model interface.
  */
 
 public class NewsRepository implements NewsDataSource {
+    @Nullable
+    private static NewsRepository INSTANCE = null;
+
+    private NewsRepository() {};
+
+    public static NewsRepository getInstance() {
+        if(INSTANCE == null) {
+            return new NewsRepository();
+        }
+        return INSTANCE;
+    }
 
     @Override
-    public Observable<List<Article>> getNews() {
+    public Flowable<List<Article>> getNews() {
         List<Article> articles = new List<Article>() {
             @Override
             public int size() {
@@ -139,12 +151,12 @@ public class NewsRepository implements NewsDataSource {
                 return null;
             }
         };
-        return Observable.just(articles);
+        return Flowable.just(articles);
     }
 
     @Override
-    public Observable<Article> getArticle(@NonNull String articleId) {
+    public Flowable<Article> getArticle(@NonNull String articleId) {
         Article article = new Article();
-        return Observable.just(article);
+        return Flowable.just(article);
     }
 }

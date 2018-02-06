@@ -4,13 +4,13 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 
 /**
  * Model interface.
  */
 
 public interface NewsDataSource {
-    Observable<List<Article>> getNews();
-    Observable<Article> getArticle(@NonNull String articleId);
+    Flowable<List<Article>> getNews();
+    Flowable<Article> getArticle(@NonNull String articleId);
 }
