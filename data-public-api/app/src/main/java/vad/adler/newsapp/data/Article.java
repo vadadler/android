@@ -80,4 +80,19 @@ public class Article {
         mPublishedAt = publishedAt;
     }
 
+    /**
+     * Default constructor.
+     * TODO: Do we need this? This is a temp implementation to allow prototyping.
+     */
+    public Article() {
+        mId = UUID.randomUUID().toString();
+        mSource = "";
+        mAuthor = "";
+        mTitle = "";
+        mDescriotion = "";
+        mUrl = "";
+        mUrlToImage = "";
+        mPublishedAt = new Date();
+    }
+
 }
