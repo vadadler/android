@@ -1,7 +1,20 @@
 
 ## Another coding assignment ##
-Ok, I am on the market again. I am looking for an Android developer position. You've been there. You know the drill.
+Ok, I am on the market again. I am looking for Android developer position. You've been there. You know the drill.
 Below is copy and paste of an assignment I got. Seems fare? I don't know the expectations yet. My wildly incorrect estimate is a week. That is 7x24 hours to complete this. I know I am wrong. But sometimes it feels good to know that you are wrong. Excitimet comes not from what you know, but from what you don't know.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Bonus](#bonus)
+- [What to build?](what-to-build?)
+- [Architecture](#architecture)
+- [MVP or MVVM](#mvp-or-mvvm)
+- [Guidelines](#guidelines)
+- [Screens](#screens)
+- [High level architecture](#high-level-architecture)
+- [UML](#uml)
 
 ## Overview ##
 Build an Android application from scratch and be prepared to explain the purpose and decision-making behind
@@ -60,7 +73,7 @@ There are pros and cons for both architectual approaches. I decided to use MVP s
 ## Guidelines ##
 Below is list of guidelines I am trying to follow:
 1. Make views dumb and passive. By following [Passive View](https://martinfowler.com/eaaDev/PassiveScreen.html) pattern testability is being improved as well as separation of concerns is being enforced.
-2. Make presenter Android-free. Abstract presenter from implementation details (Android). By having pure Java implementation improves testability (no need of Android emulator).
+2. Make presenter Android-free. Abstract presenter from implementation details (Android). By having pure Java implementation improves testability (no need for Android emulator).
 3. 
 
 ## Screens ##
@@ -69,6 +82,11 @@ I decided to use Google News application as starting point.
 | Main Screen   | Main Screen Details |
 | ------------- |---------------------|
 | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/newsapp.png) | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/newsapp_parts.png)       |
+
+## High level architecture ##
+
+Initial implementation of the application will always read current news from https://newsapi.org/ and persist them in SQLite instance. Views will be updated from that SQLite database. This approach leaves plenty of opportunities to optimize and enhance user experience. 
+![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/high_level_architecture.png)
 
 ## UML ##
 | Contract   | ![](https://github.com/vadadler/android/blob/master/data-public-api/artifacts/contract.png) |
