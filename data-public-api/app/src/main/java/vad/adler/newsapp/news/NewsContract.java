@@ -1,7 +1,12 @@
 package vad.adler.newsapp.news;
 
+import android.support.annotation.NonNull;
+
+import java.util.List;
+
 import vad.adler.newsapp.BasePresenter;
 import vad.adler.newsapp.BaseView;
+import vad.adler.newsapp.data.Article;
 
 /**
  *
@@ -9,6 +14,11 @@ import vad.adler.newsapp.BaseView;
 public interface NewsContract {
 
     interface View extends BaseView<Presenter> {
+        /**
+         * Show list of {@link Article articles}.
+         * @param articles
+         */
+        void showNews(List<Article> articles);
     }
 
     interface Presenter extends BasePresenter {
@@ -17,5 +27,10 @@ public interface NewsContract {
          */
         void getNews();
 
+        /**
+         * Get a specific news article.
+         * @param article
+         */
+        void getArticle(@NonNull Article article);
     }
 }
