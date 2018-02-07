@@ -3,8 +3,10 @@ package vad.adler.newsapp.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.util.UUID;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * News article POJO.
@@ -17,42 +19,49 @@ public class Article {
     /**
      * Display name for the source the article came from.
      */
+    @SerializedName("name")
     @NonNull
     private final String mSource;
 
     /**
      * The author of the article.
      */
+    @SerializedName("author")
     @NonNull
     private final String mAuthor;
 
     /**
      * The headline or title of the article.
      */
+    @SerializedName("title")
     @NonNull
     private final String mTitle;
 
     /**
      * A description or snippet from the article.
      */
+    @SerializedName("description")
     @NonNull
     private final String mDescriotion;
 
     /**
      * The direct URL to the article.
      */
+    @SerializedName("url")
     @NonNull
     private final String mUrl;
 
     /**
      * The URL to a relevant image for the article.
      */
+    @SerializedName("urlToImage")
     @NonNull
     private final String mUrlToImage;
 
     /**
      * The date and time that the article was published, in UTC (+000).
      */
+    @SerializedName("publishedAt")
     @NonNull
     private final Date mPublishedAt;
 
