@@ -52,6 +52,15 @@
                 android:textColor="@color/colorSecondaryText"
                 tools:text="2h ago" />
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:id="@+id/expand_collapse"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24px"/>
+
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
