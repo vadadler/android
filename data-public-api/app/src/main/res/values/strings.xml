@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">newsapp</string>
+    <string name="toolbar_title">Top headlines</string>
 </resources>
