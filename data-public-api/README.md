@@ -1,8 +1,3 @@
-
-## Another coding assignment ##
-Ok, I am on the market again. I am looking for Android developer position. You've been there. You know the drill.
-Below is copy and paste of an assignment I got. Seems fare? I don't know the expectations yet. My wildly incorrect estimate is a week. That is 7x24 hours to complete this. I know I am wrong. But sometimes it feels good to know that you are wrong. Excitimet comes not from what you know, but from what you don't know.
-
 ## Table of Contents
 
 - [Overview](#overview)
