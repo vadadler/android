@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindDrawable(R.drawable.ic_menu_black_24px) Drawable menu;
     @BindString(R.string.toolbar_title) String toolbarTitle;
+    @BindString(R.string.not_implemented) String notImplemented;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //setSupportActionBar(toolbar);
+        //getSupportActionBar();
         toolbar.setNavigationIcon(menu);
         toolbar.setTitle(toolbarTitle);
     }
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 case R.drawable.ic_menu_black_24px:
                 case R.id.search:
-                    Snackbar.make(view, "Not implemented", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
                     break;
             }
         }
