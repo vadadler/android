@@ -2,10 +2,15 @@ package vad.adler.newsapp;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.support.design.widget.Snackbar;
 
 import butterknife.BindDrawable;
 import butterknife.BindString;
@@ -15,9 +20,11 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindDrawable(R.drawable.ic_menu_black_24px) Drawable menu;
+    @BindDrawable(R.drawable.ic_menu_black_24px) Drawable ic_menu;
     @BindString(R.string.toolbar_title) String toolbarTitle;
     @BindString(R.string.not_implemented) String notImplemented;
+    @BindView(R.id.nvView) NavigationView nvView;
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +33,80 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar();
-        toolbar.setNavigationIcon(menu);
+//        setSupportActionBar(toolbar);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle(toolbarTitle);
+//        actionBar.setIcon(menu);
+        toolbar.setNavigationIcon(ic_menu);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
+            }
+        });
+
         toolbar.setTitle(toolbarTitle);
+
+        setupDrawerContent(nvView);
+        ActionBarDrawerToggle drawerToggle = setupDrawerToggle();
+        // Tie DrawerLayout events to the ActionBarToggle
+        drawer.addDrawerListener(drawerToggle);
     }
 
-    @OnClick({R.id.toolbar, R.id.search})
+    @OnClick({R.id.search})
         public void setViewOnClickEvent(View view) {
             switch(view.getId())
             {
-                case R.drawable.ic_menu_black_24px:
                 case R.id.search:
                     Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
                     break;
             }
         }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // The action bar home/up action should open or close the drawer.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.category_general:
+            case R.id.category_business:
+            case R.id.category_technology:
+            case R.id.category_entertainment:
+            case R.id.category_sports:
+            case R.id.category_health:
+            case R.id.category_science:
+            default:
+                break;
+
+        }
+        Snackbar.make(toolbar, notImplemented, Snackbar.LENGTH_LONG).show();
+        drawer.closeDrawers();
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
+        // and will not render the hamburger icon without it.
+        return new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
 }

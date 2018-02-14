@@ -1,34 +1,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/category_general"
             android:icon="@drawable/ic_account_balance_black_24px"
-            android:title="First" />
+            android:title="@string/category_general" />
         <item
             android:id="@+id/category_business"
             android:icon="@drawable/ic_business_black_24px"
-            android:title="First" />
+            android:title="@string/category_business" />
         <item
             android:id="@+id/category_technology"
             android:icon="@drawable/ic_developer_board_black_24px"
-            android:title="Second" />
+            android:title="@string/category_technology" />
         <item
             android:id="@+id/category_entertainment"
             android:icon="@drawable/ic_local_movies_black_24px"
-            android:title="Second" />
+            android:title="@string/category_entertainment" />
         <item
             android:id="@+id/category_sports"
             android:icon="@drawable/ic_directions_bike_black_24px"
-            android:title="Second" />
+            android:title="@string/category_sports" />
         <item
-            android:id="@+id/category_schience"
+            android:id="@+id/category_science"
             android:icon="@drawable/ic_polymer_black_24px"
-            android:title="Second" />
+            android:title="@string/category_science" />
         <item
             android:id="@+id/category_health"
             android:icon="@drawable/ic_fitness_center_black_24px"
-            android:title="First" />
+            android:title="@string/category_health" />
 
     </group>
 </menu>
