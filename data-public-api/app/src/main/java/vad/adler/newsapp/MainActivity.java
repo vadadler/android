@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,17 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle(toolbarTitle);
-//        actionBar.setIcon(menu);
         toolbar.setNavigationIcon(ic_menu);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
-            }
-        });
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
+//            }
+//        });
 
         toolbar.setTitle(toolbarTitle);
 
@@ -63,19 +58,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawer.openDrawer(GravityCompat.START);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
+    /**
+     * Set a listener that will be notified when a menu item is selected.
+     *
+     * @param navigationView Represents a standard navigation menu for the application.
+     *                       The menu contents is populated by menu resource file.
+     */
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -87,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Handle selected item of the navigation menu.
+     *
+     * @param menuItem selected menu item.
+     */
     public void selectDrawerItem(MenuItem menuItem) {
         switch(menuItem.getItemId()) {
             case R.id.category_general:
