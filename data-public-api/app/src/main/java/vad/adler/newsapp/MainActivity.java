@@ -6,24 +6,34 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.support.DaggerAppCompatActivity;
+import vad.adler.newsapp.data.Article;
+import vad.adler.newsapp.news.NewsContract;
+import vad.adler.newsapp.news.NewsPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DaggerAppCompatActivity implements NewsContract.View {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindDrawable(R.drawable.ic_menu_black_24px) Drawable ic_menu;
     @BindString(R.string.toolbar_title) String toolbarTitle;
     @BindString(R.string.not_implemented) String notImplemented;
     @BindView(R.id.nvView) NavigationView nvView;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
+
+    @Inject
+    NewsPresenter mNewsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,30 +43,32 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         toolbar.setNavigationIcon(ic_menu);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
-//            }
-//        });
-
         toolbar.setTitle(toolbarTitle);
 
         setupDrawerContent(nvView);
         ActionBarDrawerToggle drawerToggle = setupDrawerToggle();
-        // Tie DrawerLayout events to the ActionBarToggle
         drawer.addDrawerListener(drawerToggle);
     }
 
     @OnClick({R.id.search})
-        public void setViewOnClickEvent(View view) {
-            switch(view.getId())
-            {
-                case R.id.search:
-                    Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
-                    break;
-            }
+    public void setViewOnClickEvent(View view) {
+        switch(view.getId())
+        {
+            case R.id.search:
+                Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
+                break;
         }
+    }
+
+    @Override
+    public void setPresenter(NewsContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void showNews(List<Article> articles) {
+
+    }
 
     /**
      * Set a listener that will be notified when a menu item is selected.
