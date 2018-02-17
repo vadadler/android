@@ -60,10 +60,10 @@ public class MainActivity extends DaggerAppCompatActivity implements NewsContrac
         }
     }
 
-    @Override
-    public void setPresenter(NewsContract.Presenter presenter) {
-
-    }
+//    @Override
+//    public void setPresenter(NewsContract.Presenter presenter) {
+//
+//    }
 
     @Override
     public void showNews(List<Article> articles) {

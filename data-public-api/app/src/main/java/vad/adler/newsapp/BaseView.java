@@ -24,6 +24,6 @@ public interface BaseView<T> {
      * Set Presenter.
      * @param presenter
      */
-    void setPresenter(T presenter);
+    //void setPresenter(T presenter);
 
 }
