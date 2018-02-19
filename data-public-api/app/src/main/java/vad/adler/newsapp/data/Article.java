@@ -15,58 +15,58 @@ import java.util.UUID;
 @Entity(tableName = "news")
 public class Article {
     @PrimaryKey
-    @SerializedName("id")
+    @SerializedName("articleId")
     @NonNull
-    private final String mId;
+    private String mArticleId;
 
     /**
      * Display name for the source the article came from.
      */
     @SerializedName("name")
     @NonNull
-    private final String mSource;
+    private String mSource;
 
     /**
      * The author of the article.
      */
     @SerializedName("author")
     @NonNull
-    private final String mAuthor;
+    private String mAuthor;
 
     /**
      * The headline or title of the article.
      */
     @SerializedName("title")
     @NonNull
-    private final String mTitle;
+    private String mTitle;
 
     /**
      * A description or snippet from the article.
      */
     @SerializedName("description")
     @NonNull
-    private final String mDescriotion;
+    private String mDescriotion;
 
     /**
      * The direct URL to the article.
      */
     @SerializedName("url")
     @NonNull
-    private final String mUrl;
+    private String mUrl;
 
     /**
      * The URL to a relevant image for the article.
      */
     @SerializedName("urlToImage")
     @NonNull
-    private final String mUrlToImage;
+    private String mUrlToImage;
 
     /**
      * The date and time that the article was published, in UTC (+000).
      */
     @SerializedName("publishedAt")
     @NonNull
-    private final String mPublishedAt;
+    private String mPublishedAt;
 
     /**
      * Constructor for individual article.
@@ -82,7 +82,7 @@ public class Article {
     public Article(@Nullable String source, @Nullable String author, @Nullable String title,
                    @Nullable String description, @Nullable String url, @Nullable String urlToImage,
                    @Nullable String publishedAt) {
-        mId = UUID.randomUUID().toString();
+        mArticleId = UUID.randomUUID().toString();
         mSource = source;
         mAuthor = author;
         mTitle = title;
@@ -97,7 +97,7 @@ public class Article {
      * TODO: Do we need this? This is a temp implementation to allow prototyping.
      */
     public Article() {
-        mId = UUID.randomUUID().toString();
+        mArticleId = UUID.randomUUID().toString();
         mSource = "";
         mAuthor = "";
         mTitle = "";
@@ -108,8 +108,8 @@ public class Article {
     }
 
     @NonNull
-    public String getId() {
-        return mId;
+    public String getArticleId() {
+        return mArticleId;
     }
 
     @NonNull
@@ -132,8 +132,23 @@ public class Article {
     public String getUrl() { return  mUrl; }
 
     @NonNull
-    String getUrlToImage() { return  mUrlToImage; }
+    public String getUrlToImage() { return  mUrlToImage; }
 
     @NonNull
-    String getPublishedAt() { return  mPublishedAt; }
+    public String getPublishedAt() { return  mPublishedAt; }
+
+    public void setArticleId(String id) {
+        mArticleId = id;
+    }
+    public void setSource(String source) {
+        mSource = source;
+    }
+    public void setAuthor(String author) {
+        mAuthor = author;
+    }
+    public void setTitle(String title) { mTitle = title; }
+    public void setDescriotion(String description) { mDescriotion = description; }
+    public void setUrl(String url) { mUrl = url; }
+    public void setUrlToImage(String urlToImage) { mUrlToImage = urlToImage; }
+    public void setPublishedAt(String publisdhedAt) { mPublishedAt = publisdhedAt; }
 }

@@ -27,8 +27,8 @@ public interface NewsDao {
      * @param articleId the task id.
      * @return the articles with taskId.
      */
-    @Query("SELECT * FROM news WHERE articleId = :articleId")
-    Article getArticleById(String articleId);
+//    @Query("SELECT * FROM news WHERE articleId = :articleId")
+//    Article getArticleById(String articleId);
 
     /**
      * Insert an article in the database. If such article already exists, replace it.
