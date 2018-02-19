@@ -38,12 +38,4 @@ abstract public class NewsRepositoryModule {
     static NewsDao provideTasksDao(NewsDatabase db) {
         return db.newsDao();
     }
-
-    @Singleton
-    @Provides
-    static AppExecutors provideAppExecutors() {
-        return new AppExecutors(new DiskIOThreadExecutor(),
-                Executors.newFixedThreadPool(THREAD_COUNT),
-                new AppExecutors.MainThreadExecutor());
-    }
 }

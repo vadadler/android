@@ -3,9 +3,6 @@ package vad.adler.newsapp;
 import android.app.Application;
 import android.support.annotation.VisibleForTesting;
 
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
-import com.example.android.architecture.blueprints.todoapp.di.DaggerAppComponent;
-
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;

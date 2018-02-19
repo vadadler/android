@@ -2,16 +2,14 @@ package vad.adler.newsapp.di;
 
 import android.app.Application;
 
-import vad.adler.newsapp.NewsApplication;
-import vad.adler.newsapp.data.NewsRepository;
-import vad.adler.newsapp.data.NewsRepositoryModule;
-gd
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
+import vad.adler.newsapp.NewsApplication;
+import vad.adler.newsapp.data.NewsRepository;
 
 /**
  * This is a Dagger component. Refer to {@link NewsApplication} for the list of Dagger components

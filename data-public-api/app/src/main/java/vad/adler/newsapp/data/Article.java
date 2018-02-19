@@ -1,18 +1,21 @@
 package vad.adler.newsapp.data;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
 import java.util.UUID;
 
 /**
  * News article POJO.
  */
-
+@Entity(tableName = "news")
 public class Article {
+    @PrimaryKey
+    @SerializedName("id")
     @NonNull
     private final String mId;
 
@@ -63,7 +66,7 @@ public class Article {
      */
     @SerializedName("publishedAt")
     @NonNull
-    private final Date mPublishedAt;
+    private final String mPublishedAt;
 
     /**
      * Constructor for individual article.
@@ -78,7 +81,7 @@ public class Article {
      */
     public Article(@Nullable String source, @Nullable String author, @Nullable String title,
                    @Nullable String description, @Nullable String url, @Nullable String urlToImage,
-                   @Nullable Date publishedAt) {
+                   @Nullable String publishedAt) {
         mId = UUID.randomUUID().toString();
         mSource = source;
         mAuthor = author;
@@ -101,7 +104,36 @@ public class Article {
         mDescriotion = "";
         mUrl = "";
         mUrlToImage = "";
-        mPublishedAt = new Date();
+        mPublishedAt = "";
     }
 
+    @NonNull
+    public String getId() {
+        return mId;
+    }
+
+    @NonNull
+    public String getSource() {
+        return mSource;
+    }
+
+    @NonNull
+    public String getAuthor() {
+        return mAuthor;
+    }
+
+    @NonNull
+    public String getTitle() { return  mTitle; }
+
+    @NonNull
+    public String getDescriotion() { return  mDescriotion; }
+
+    @NonNull
+    public String getUrl() { return  mUrl; }
+
+    @NonNull
+    String getUrlToImage() { return  mUrlToImage; }
+
+    @NonNull
+    String getPublishedAt() { return  mPublishedAt; }
 }
