@@ -2,7 +2,10 @@ package vad.adler.newsapp.di;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import javax.inject.Singleton;
+
+import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -13,7 +16,7 @@ import vad.adler.newsapp.data.NewsApi;
 /**
  * DI: provide objects which can be injected.
  */
-
+@Module
 public class NetworkModule {
     @Provides
     @Singleton

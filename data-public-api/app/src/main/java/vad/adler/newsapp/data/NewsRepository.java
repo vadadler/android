@@ -1,12 +1,13 @@
 package vad.adler.newsapp.data;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 
@@ -15,17 +16,8 @@ import io.reactivex.Flowable;
  */
 
 public class NewsRepository implements NewsDataSource {
-    @Nullable
-    private static NewsRepository INSTANCE = null;
-
-    private NewsRepository() {};
-
-    public static NewsRepository getInstance() {
-        if(INSTANCE == null) {
-            return new NewsRepository();
-        }
-        return INSTANCE;
-    }
+    @Inject
+    public NewsRepository() {};
 
     @Override
     public Flowable<List<Article>> getNews() {

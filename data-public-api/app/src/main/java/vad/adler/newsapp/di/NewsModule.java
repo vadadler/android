@@ -9,7 +9,7 @@ import vad.adler.newsapp.news.NewsPresenter;
 
 /**
  * This is a Dagger module. We use this to pass in the View dependency to the
- * {@link vad.adler.newsapp.news.NewsPresenter}.
+ * {@link NewsPresenter}.
  */
 @Module
 public abstract class NewsModule {

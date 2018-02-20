@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import vad.adler.newsapp.data.NewsRepository;
+import vad.adler.newsapp.di.DaggerAppComponent;
 
 /**
  * We create a custom {@link Application} class that extends  {@link DaggerApplication}.

@@ -3,8 +3,6 @@ package vad.adler.newsapp.di;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
-import java.util.concurrent.Executors;
-
 import javax.inject.Singleton;
 
 import dagger.Binds;
@@ -15,7 +13,7 @@ import vad.adler.newsapp.data.NewsDataSource;
 import vad.adler.newsapp.data.NewsDatabase;
 
 /**
- * This is used by Dagger to inject the required arguments into the {@link NewsRepository}.
+ * This is used by Dagger to inject the required arguments into the {@link vad.adler.newsapp.data.NewsRepository}.
  */
 @Module
 abstract public class NewsRepositoryModule {
