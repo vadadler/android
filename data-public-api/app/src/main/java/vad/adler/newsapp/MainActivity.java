@@ -50,6 +50,12 @@ public class MainActivity extends DaggerAppCompatActivity implements NewsContrac
         drawer.addDrawerListener(drawerToggle);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mNewsPresenter.subscribe();
+    }
+
     @OnClick({R.id.search})
     public void setViewOnClickEvent(View view) {
         switch(view.getId())

@@ -14,7 +14,7 @@ import vad.adler.newsapp.data.NewsRepository;
  * <p/>
  * By marking the constructor with {@code @Inject}, Dagger injects the dependencies required to
  * create an instance of the NewsPresenter (if it fails, it emits a compiler error).  It uses
- * {@link NewsModule} to do so.
+ * {@link vad.adler.newsapp.di.NewsModule} to do so.
  * <p/>
  * Dagger generated code doesn't require public access to the constructor or class, and
  * therefore, to ensure the developer doesn't instantiate the class manually and bypasses Dagger,
@@ -22,8 +22,8 @@ import vad.adler.newsapp.data.NewsRepository;
  **/
 
 public class NewsPresenter implements NewsContract.Presenter {
-
-    private final NewsRepository mNewsRepository;
+    @Inject
+    NewsRepository mNewsRepository;
 
     @Nullable
     private NewsContract.View mNewsView;
@@ -38,13 +38,16 @@ public class NewsPresenter implements NewsContract.Presenter {
     }
 
     @Override
-    public void subscribe() {}
+    public void subscribe() { getNews(); }
 
     @Override
     public void unsubscribe() {}
 
     @Override
-    public void getNews() {}
+    public void getNews() {
+
+
+    }
 
     @Override
     public void getArticle(Article article) {}
