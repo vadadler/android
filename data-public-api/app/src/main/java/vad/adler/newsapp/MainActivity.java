@@ -29,6 +29,7 @@ public class MainActivity extends DaggerAppCompatActivity implements NewsContrac
     @BindDrawable(R.drawable.ic_menu_black_24px) Drawable ic_menu;
     @BindString(R.string.toolbar_title) String toolbarTitle;
     @BindString(R.string.not_implemented) String notImplemented;
+    @BindString(R.string.error_loading_news) String errorLoadingNews;
     @BindView(R.id.nvView) NavigationView nvView;
     @BindView(R.id.drawer_layout) DrawerLayout drawer;
 
@@ -61,9 +62,18 @@ public class MainActivity extends DaggerAppCompatActivity implements NewsContrac
         switch(view.getId())
         {
             case R.id.search:
-                Snackbar.make(view, notImplemented, Snackbar.LENGTH_LONG).show();
+                showMessage(notImplemented);
                 break;
         }
+    }
+
+    @Override
+    public void showLoadingNewsError() {
+        showMessage(errorLoadingNews);
+    }
+
+    private void showMessage(String message) {
+        Snackbar.make(toolbar, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

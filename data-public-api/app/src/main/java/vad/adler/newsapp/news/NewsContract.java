@@ -19,6 +19,8 @@ public interface NewsContract {
          * @param articles
          */
         void showNews(List<Article> articles);
+
+        void showLoadingNewsError();
     }
 
     interface Presenter extends BasePresenter {

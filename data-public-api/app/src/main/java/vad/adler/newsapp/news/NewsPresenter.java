@@ -1,9 +1,15 @@
 package vad.adler.newsapp.news;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import vad.adler.newsapp.data.Article;
 import vad.adler.newsapp.data.NewsRepository;
 
@@ -45,10 +51,24 @@ public class NewsPresenter implements NewsContract.Presenter {
 
     @Override
     public void getNews() {
-
+        Disposable disposable = mNewsRepository.getNews()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        // onNext
+                        articles -> {
+                            processArticles(articles);
+                        },
+                        // onError
+                        throwable -> mNewsView.showLoadingNewsError());
 
     }
 
     @Override
     public void getArticle(Article article) {}
+
+    private void processArticles(@NonNull List<Article> articles) {
+        mNewsView.showNews(articles);
+    }
+
 }
