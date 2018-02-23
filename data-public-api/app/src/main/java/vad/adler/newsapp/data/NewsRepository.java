@@ -7,6 +7,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import retrofit2.Retrofit;
+import vad.adler.newsapp.Constants;
 
 /**
  * Implementation of model interface.
@@ -16,8 +22,8 @@ public class NewsRepository implements NewsDataSource {
     @Inject
     public NewsRepository() {};
 
-//    @Inject
-//    Retrofit retrofit;
+    @Inject
+    Retrofit retrofit;
 
     /**
      * Current implementation fetches latest news from Newsapi (REST), then stores them in SQLite
@@ -27,21 +33,21 @@ public class NewsRepository implements NewsDataSource {
     @Override
     public Flowable<List<Article>> getNews() {
         Flowable<List<Article>> articles2 = null;
-//        CompositeDisposable compositeDisposable = new CompositeDisposable();
-//        compositeDisposable.add(retrofit.create(NewsApi.class).getHeadlinesCountry("us", Constants.API_KEY)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<List<Article>>() {
-//                    @Override
-//                    public void accept(
-//                            @io.reactivex.annotations.NonNull final List<Article> articles)
-//                            throws Exception {
-//                        for(Article article : articles) {
-//                            System.out.println(article.getDescriotion());
-//                        }
-//                    }
-//                })
-//        );
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(retrofit.create(NewsApi.class).getHeadlinesCountry("us", Constants.API_KEY)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Article>>() {
+                    @Override
+                    public void accept(
+                            @io.reactivex.annotations.NonNull final List<Article> articles)
+                            throws Exception {
+                        for(Article article : articles) {
+                            System.out.println(article.getDescriotion());
+                        }
+                    }
+                })
+        );
 
 
         return articles2;

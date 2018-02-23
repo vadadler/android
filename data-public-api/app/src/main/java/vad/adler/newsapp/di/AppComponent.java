@@ -24,7 +24,8 @@ import vad.adler.newsapp.data.NewsRepository;
 @Component(modules = {NewsRepositoryModule.class,
         ApplicationModule.class,
         NewsModule.class,
-        AndroidSupportInjectionModule.class})
+        AndroidSupportInjectionModule.class,
+        NetworkModule.class})
 public interface AppComponent extends AndroidInjector<NewsApplication> {
 
     NewsRepository getNewsRepository();

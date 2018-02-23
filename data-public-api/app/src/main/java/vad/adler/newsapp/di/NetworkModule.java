@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import vad.adler.newsapp.Constants;
 
@@ -29,27 +29,7 @@ public class NetworkModule {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(Constants.BASE_URL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
-
-//    @Provides
-//    @Singleton
-//    NewsApi provideNewsApi(Retrofit retrofit) {
-//        return retrofit.create(NewsApi.class);
-//    }
-
-//    @GET("top-headlines")
-//    Flowable<List<Article>> getHeadlinesCountry(@Query("country") String country,
-//                                                @Query("apiKey") String apiKey);
-//
-//    @GET("top-headlines")
-//    Flowable<List<Article>> getHeadlinesSources(@Query("sources") String sources,
-//                                                @Query("apiKey") String apiKey);
-//
-//    @GET("top-headlines")
-//    Flowable<List<Article>> getHeadlinesCategory(@Query("country") String country,
-//                                                 @Query("category") String category,
-//                                                 @Query("apiKey") String apiKey);
-
 }
