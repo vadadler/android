@@ -11,7 +11,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import vad.adler.newsapp.Constants;
-import vad.adler.newsapp.data.NewsApi;
 
 /**
  * DI: provide objects which can be injected.
@@ -34,9 +33,23 @@ public class NetworkModule {
                 .build();
     }
 
-    @Provides
-    @Singleton
-    NewsApi provideCityApi(Retrofit retrofit) {
-        return retrofit.create(NewsApi.class);
-    }
+//    @Provides
+//    @Singleton
+//    NewsApi provideNewsApi(Retrofit retrofit) {
+//        return retrofit.create(NewsApi.class);
+//    }
+
+//    @GET("top-headlines")
+//    Flowable<List<Article>> getHeadlinesCountry(@Query("country") String country,
+//                                                @Query("apiKey") String apiKey);
+//
+//    @GET("top-headlines")
+//    Flowable<List<Article>> getHeadlinesSources(@Query("sources") String sources,
+//                                                @Query("apiKey") String apiKey);
+//
+//    @GET("top-headlines")
+//    Flowable<List<Article>> getHeadlinesCategory(@Query("country") String country,
+//                                                 @Query("category") String category,
+//                                                 @Query("apiKey") String apiKey);
+
 }

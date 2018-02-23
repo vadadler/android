@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import vad.adler.newsapp.data.Article;
@@ -34,6 +35,9 @@ public class NewsPresenter implements NewsContract.Presenter {
     @Nullable
     private NewsContract.View mNewsView;
 
+    @NonNull
+    private CompositeDisposable mCompositeDisposable;
+
     /**
      * Dagger strictly enforces that arguments not marked with {@code @Nullable} are not injected
      * with {@code @Nullable} values.
@@ -41,13 +45,14 @@ public class NewsPresenter implements NewsContract.Presenter {
     @Inject
     NewsPresenter(NewsRepository newsRepository) {
         mNewsRepository = newsRepository;
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override
     public void subscribe() { getNews(); }
 
     @Override
-    public void unsubscribe() {}
+    public void unsubscribe() { mCompositeDisposable.clear(); }
 
     @Override
     public void getNews() {
@@ -61,7 +66,6 @@ public class NewsPresenter implements NewsContract.Presenter {
                         },
                         // onError
                         throwable -> mNewsView.showLoadingNewsError());
-
     }
 
     @Override

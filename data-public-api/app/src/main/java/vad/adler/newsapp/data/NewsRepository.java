@@ -16,6 +16,9 @@ public class NewsRepository implements NewsDataSource {
     @Inject
     public NewsRepository() {};
 
+//    @Inject
+//    Retrofit retrofit;
+
     /**
      * Current implementation fetches latest news from Newsapi (REST), then stores them in SQLite
      * database and then returns results from that SQLite db.
@@ -23,8 +26,25 @@ public class NewsRepository implements NewsDataSource {
      */
     @Override
     public Flowable<List<Article>> getNews() {
-        Flowable<List<Article>> articles = null;
-        return articles;
+        Flowable<List<Article>> articles2 = null;
+//        CompositeDisposable compositeDisposable = new CompositeDisposable();
+//        compositeDisposable.add(retrofit.create(NewsApi.class).getHeadlinesCountry("us", Constants.API_KEY)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<List<Article>>() {
+//                    @Override
+//                    public void accept(
+//                            @io.reactivex.annotations.NonNull final List<Article> articles)
+//                            throws Exception {
+//                        for(Article article : articles) {
+//                            System.out.println(article.getDescriotion());
+//                        }
+//                    }
+//                })
+//        );
+
+
+        return articles2;
     }
 
     @Override
